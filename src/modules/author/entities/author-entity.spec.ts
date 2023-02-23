@@ -1,25 +1,17 @@
 import { describe, expect, it } from "vitest";
-import { Author } from "./author-entity";
-import { Email, Name, Password } from "./validation";
+import { makeAuthor } from "../factory/makeAuthor";
+import { Name } from "./validation";
 
 describe("Author entity", () => {
     it("should be able to instace an Author", () => {
-        const author = new Author({
-            name: new Name("test name"),
-            password: new Password("Test-password!2"),
-            bio: "test bio",
-            username: new Email("testemail@gnmail.com"),
-        });
+        const author = makeAuthor();
         expect(author).toBeTruthy();
     });
 
     it("should not be able to instace an Author with Name in a wrong format", () => {
         expect(() => {
-            new Author({
-                name: new Name("test-name"),
-                password: new Password("Test-password!2"),
-                bio: "test bio",
-                username: new Email("testemail@gnmail.com"),
+            return makeAuthor({
+                name: new Name("test-wrong-format-name"),
             });
         }).toThrow();
     });
