@@ -5,8 +5,8 @@ export class BaseEntityValidation {
         private readonly shouldValidate = true
     ) {
         if (!this.shouldValidate) return;
-        this.isInputValid();
-        throw new Error(`Input ${this.input} has the wrong format.`);
+        if (!this.isInputValid())
+            throw new Error(`Input ${this.input} has the wrong format.`);
     }
 
     private isInputValid(): boolean {
