@@ -4,7 +4,9 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
+app.get("/host/:id", (req, res) => {
+    console.log(req.originalUrl);
+
     return res.json({
         message: "Hello world",
     });
