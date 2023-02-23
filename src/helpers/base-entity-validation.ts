@@ -9,7 +9,11 @@ export class BaseEntityValidation {
         throw new Error(`Input ${this.input} has the wrong format.`);
     }
 
-    isInputValid(): boolean {
+    private isInputValid(): boolean {
         return this.input.match(this.regex) !== null;
+    }
+
+    get value() {
+        return this.input;
     }
 }
