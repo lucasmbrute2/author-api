@@ -11,7 +11,9 @@
         "skipLibCheck": true,
         "outDir": "./dist",
         "paths": {
-            "@modules/*": ["src/modules/*"]
+            "@modules/*": ["modules/*"],
+            "@constraints/*": ["constraints/*"],
+            "@helpers/*": ["helpers/*"]
         }
     }
 }
