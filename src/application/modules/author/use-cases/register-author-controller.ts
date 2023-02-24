@@ -1,3 +1,4 @@
+import { AuthorViewlModel } from "../../../views/author-view-model";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { RegisterAuthorUseCase } from "./register-author-use-case";
@@ -26,7 +27,7 @@ export class RegisterAuthorController {
         });
 
         return res.status(201).json({
-            author,
+            author: AuthorViewlModel.toHTTP(author),
             token,
         });
     }

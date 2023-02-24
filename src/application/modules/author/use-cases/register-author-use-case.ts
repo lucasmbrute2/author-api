@@ -39,7 +39,7 @@ export class RegisterAuthorUseCase {
         const { email, name, password, confirmPassword } = request;
 
         if (password !== confirmPassword)
-            throw new BadRequestError("The passwords are not the same");
+            throw new BadRequestError("The passwords do not match");
 
         const validatedEmail = new Email(email);
 
