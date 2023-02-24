@@ -9,7 +9,7 @@ export function makeUserInRequest(
         email: "testemail@gmail.com",
         password: "Amerau@1234",
         name: "test name",
-        confirmPassword: '"Amerau@1234',
+        confirmPassword: "Amerau@1234",
         ...override,
     };
 }
