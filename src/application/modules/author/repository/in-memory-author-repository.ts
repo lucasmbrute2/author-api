@@ -19,7 +19,7 @@ export class InMemoryRepository implements AuthorRepository {
         return author;
     }
 
-    async update(id: string, data: Partial<Author>): Promise<Author> {
+    async save(id: string, data: Partial<Author>): Promise<Author> {
         const authorIndex = this.authors.findIndex(
             (author) => author.id === id
         );
