@@ -1,14 +1,14 @@
 import "reflect-metadata";
 import express, { NextFunction, Request, Response } from "express";
-import "./shared/container/index";
 import { AppError } from "./shared/errors/app-error";
 import "express-async-errors";
-import "./shared/infra/http/routes";
+import { route } from "./shared/infra/http/routes";
+import "./shared/container/index";
 
 const app = express();
 
 app.use(express.json());
-
+app.use(route);
 // app.get("/host/:id", (req, res) => {
 //     console.log(req.originalUrl);
 
