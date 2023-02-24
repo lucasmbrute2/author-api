@@ -6,9 +6,8 @@ export class BaseEntityValidation {
         private readonly regex: RegExp,
         private readonly shouldValidate: boolean
     ) {
-        if (!input) throw new AppError("Input missing", 400);
-
         if (!this.shouldValidate) return;
+        if (!input) throw new AppError("Input missing", 400);
         if (!this.isInputValid())
             throw new AppError(
                 `Input ${this.input} has the wrong format.`,
