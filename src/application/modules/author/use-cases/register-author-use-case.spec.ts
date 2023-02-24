@@ -49,4 +49,24 @@ describe("Register Author", () => {
             });
         }).rejects.toBeInstanceOf(BadRequestError);
     });
+
+    it("should be able to save a hash instead password in database", async () => {
+        const author = makeUserInRequest();
+        await registerAuthorUseCase.execute(author);
+
+        const lastRegisteredAuthor = authorRepository.authors[0].password.value;
+
+        expect(author.password).not.toEqual(lastRegisteredAuthor);
+    });
+
+    it("should be able to save a jwt token in memory", async () => {
+        const author = makeUserInRequest();
+        const { token } = await registerAuthorUseCase.execute(author);
+
+        const storagedToken = await inMemoryRedisProvider.getValue(
+            author.email
+        );
+
+        expect(token).toEqual(storagedToken);
+    });
 });

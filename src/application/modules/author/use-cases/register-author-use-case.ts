@@ -55,7 +55,8 @@ export class RegisterAuthorUseCase {
             password: new Password(password),
         });
 
-        const TOKEN_EXPIRE_IN_HOURS = 60 * 60 * 1;
+        const SECONDS = 60;
+        const TOKEN_EXPIRE_IN_HOURS = SECONDS * SECONDS * 1;
 
         const token = sign({}, enviromentVariables.jwtTokenHash, {
             expiresIn: TOKEN_EXPIRE_IN_HOURS,
