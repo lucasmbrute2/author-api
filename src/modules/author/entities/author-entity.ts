@@ -8,7 +8,7 @@ interface AuthorProps {
     email: Email;
     password: Password;
     profile_picture?: string;
-    bio: string;
+    bio?: string;
     created_at: Date;
     deleted_at?: Date;
     gallery_id?: string;

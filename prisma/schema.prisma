@@ -13,7 +13,7 @@ model Author {
   password        String
   created_at      DateTime  @db.Timestamp(6)
   deleted_at      DateTime? @db.Timestamp(6)
-  bio             String    @db.VarChar
+  bio             String?   @db.VarChar
   profile_picture String?
   username        String    @unique
   gallery         Gallery?
