@@ -11,9 +11,10 @@
         "skipLibCheck": true,
         "outDir": "./dist",
         "paths": {
-            "@modules/*": ["modules/*"],
-            "@constraints/*": ["constraints/*"],
-            "@helpers/*": ["helpers/*"]
+            "@app/*": ["application/*"],
+            "@modules/*": ["application/modules/*"],
+            "@constraints/*": ["application/constraints/*"],
+            "@helpers/*": ["application/helpers/*"]
         }
     }
 }

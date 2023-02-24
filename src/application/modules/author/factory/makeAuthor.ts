@@ -1,4 +1,4 @@
-import { Author } from "@modules/author/entities/author-entity";
+import { Author } from "../entities/author-entity";
 import { Email, Name, Password } from "../entities/validation";
 
 type partialAuthor = Partial<Author>;

@@ -1,4 +1,4 @@
-import { AuthorRepository } from "repositories/author-repository";
+import { AuthorRepository } from "application/repositories/author-repository";
 import { Author } from "../entities/author-entity";
 import { Email } from "../entities/validation";
 
