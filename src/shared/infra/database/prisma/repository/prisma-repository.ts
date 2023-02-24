@@ -42,7 +42,15 @@ export class PrismaRepositoryAuthor implements AuthorRepository {
         return PrismaMapper.toDomain(author);
     }
 
-    async findByID(id: string): Promise<Author> {
-        throw new Error("Method not implemented.");
+    async findByID(id: string): Promise<Author | null> {
+        const author = await this.prisma.author.findUnique({
+            where: {
+                id,
+            },
+        });
+
+        if (!author) return null;
+
+        return PrismaMapper.toDomain(author);
     }
 }
