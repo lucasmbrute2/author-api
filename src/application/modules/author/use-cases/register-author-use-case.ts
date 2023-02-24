@@ -2,9 +2,10 @@ import { AuthorRepository } from "@app/repositories/author-repository";
 import { Author } from "../entities/author-entity";
 import { Email, Name, Password } from "../entities/validation";
 import { makeAuthor } from "../factory/makeAuthor";
-import { createClient } from "redis";
-import jwtr from "jwt-redis";
-import { hash } from "bcrypt";
+import { hash } from "bcryptjs";
+import { inject, injectable } from "tsyringe";
+import { sign } from "jsonwebtoken";
+import { RedisRepository } from "@app/repositories/redis-repository";
 
 export interface RegisterAuthorRepositoryRequest {
     name: string;
@@ -18,19 +19,17 @@ interface RegisterAuthorRepositoryResponse {
     token: string;
 }
 
+@injectable()
 export class RegisterAuthorUseCase {
     constructor(
         private authorRepository: AuthorRepository,
-        private redisClient: any
-    ) {
-        this.redisClient = createClient();
-    }
+        @inject("RedisRepository")
+        private redisClient: RedisRepository
+    ) {}
 
-    async execute(
-        request: RegisterAuthorRepositoryRequest
-    ): Promise<RegisterAuthorRepositoryResponse> {
-        const redisClient = await this.redisClient.connect();
-        const { sign } = new jwtr(redisClient);
+    async execute(request: RegisterAuthorRepositoryRequest) {
+        await this.redisClient.disconnect(); //refac
+        await this.redisClient.connect();
 
         const { email, name, password, confirmPassword } = request;
 
@@ -50,9 +49,10 @@ export class RegisterAuthorUseCase {
             password: new Password(password),
         });
 
-        const jti = { jti: "jti-test" };
-        const token = await sign(jti, "test-secret", {
-            expiresIn: "1d",
+        const TOKEN_EXPIRE_IN_HOURS = 60 * 60 * 1;
+
+        const token = sign({}, process.env.TOKEN_MD5_HASH, {
+            expiresIn: TOKEN_EXPIRE_IN_HOURS,
         });
 
         const incryptedPassword = await hash(password, 8);
@@ -60,8 +60,14 @@ export class RegisterAuthorUseCase {
 
         await this.authorRepository.create(author);
 
+        await this.redisClient.setValue(
+            author.email.value,
+            token,
+            TOKEN_EXPIRE_IN_HOURS
+        );
+
         return {
-            author,
+            // author,
             token,
         };
     }
