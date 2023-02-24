@@ -5,7 +5,7 @@ import { Email, Name, Password } from "./validation";
 interface AuthorProps {
     id?: string;
     name: Name;
-    username: Email;
+    email: Email;
     password: Password;
     profile_picture?: string;
     bio: string;
@@ -27,12 +27,12 @@ export class Author {
         return this.props.id;
     }
 
-    set username(username: Email) {
-        this.props.username = username;
+    set email(email: Email) {
+        this.props.email = email;
     }
 
-    get username(): Email {
-        return this.props.username;
+    get email(): Email {
+        return this.props.email;
     }
 
     set name(name: Name) {

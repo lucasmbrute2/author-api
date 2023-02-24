@@ -8,7 +8,7 @@ export function makeAuthor(override?: partialAuthor): Author {
         bio: "test bio",
         name: new Name("test name"),
         password: new Password("Adk1!331d"),
-        username: new Email("testemail@gmail.com"),
+        email: new Email("testemail@gmail.com"),
         ...override,
     });
 }

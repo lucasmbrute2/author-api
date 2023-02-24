@@ -7,37 +7,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Author {        
-  id                  String      @id  @db.Uuid
-  name                String
-  username            String      @unique
-  password            String
-  profile_picture     String
-  bio                 String      @db.VarChar()
-  created_at          DateTime    @db.Timestamp()
-  deleted_at          DateTime?   @db.Timestamp()
-  
-  gallery     Gallery? 
+model Author {
+  id              String    @id @db.Uuid
+  name            String
+  password        String
+  created_at      DateTime  @db.Timestamp(6)
+  deleted_at      DateTime? @db.Timestamp(6)
+  bio             String    @db.VarChar
+  profile_picture String?
+  username        String    @unique
+  gallery         Gallery?
 }
 
 model Gallery {
-  id          String   @id @db.Uuid
-  api_link    String   @db.Text
-  
-  author      Author   @relation(fields: [authorId], references: [id])
-  authorId    String   @unique @db.Uuid
-
-  photo       Photo[]
+  id       String @id @db.Uuid
+  api_link String
+  authorId String @unique @db.Uuid
+  author   Author @relation(fields: [authorId], references: [id])
+  photo    Photo?
 }
 
-model Photo { 
-  id           String    @id @db.Uuid
-  html_url     String    @db.Text
-  name         String
-  alias_key    String    @unique
-  created_at   DateTime  @db.Timestamp()
-  deleted_at   DateTime? @db.Timestamp()
-
-  gallery      Gallery   @relation(fields: [galleryId], references: [id])
-  galleryId    String    @unique @db.Uuid
+model Photo {
+  id         String    @id @db.Uuid
+  html_url   String
+  name       String
+  alias_key  String    @unique
+  created_at DateTime  @db.Timestamp(6)
+  deleted_at DateTime? @db.Timestamp(6)
+  galleryId  String    @unique @db.Uuid
+  gallery    Gallery   @relation(fields: [galleryId], references: [id])
 }
