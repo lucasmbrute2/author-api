@@ -6,6 +6,7 @@ import { hash } from "bcryptjs";
 import { inject, injectable } from "tsyringe";
 import { sign } from "jsonwebtoken";
 import { RedisRepository } from "@app/repositories/redis-repository";
+import { enviromentVariables } from "@app/constraints/enviroment-variables";
 
 export interface RegisterAuthorRepositoryRequest {
     name: string;
@@ -53,7 +54,7 @@ export class RegisterAuthorUseCase {
 
         const TOKEN_EXPIRE_IN_HOURS = 60 * 60 * 1;
 
-        const token = sign({}, process.env.TOKEN_MD5_HASH, {
+        const token = sign({}, enviromentVariables.jwtTokenHash, {
             expiresIn: TOKEN_EXPIRE_IN_HOURS,
         });
 

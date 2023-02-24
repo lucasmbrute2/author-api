@@ -1,1 +1,1 @@
-import "@shared/container/providers/RedisProvider";
+import "../container/providers/RedisProvider/index";
