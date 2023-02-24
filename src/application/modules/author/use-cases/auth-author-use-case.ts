@@ -1,10 +1,13 @@
 import "reflect-metadata";
-import { AuthorRepository } from "@app/repositories/author-repository";
-import { BadRequestError, NotFoundError } from "@shared/errors/app-error";
+import { AuthorRepository } from "../../../repositories/author-repository";
+import {
+    BadRequestError,
+    NotFoundError,
+} from "../../../../shared/errors/app-error";
 import { inject, injectable } from "tsyringe";
 import { Email } from "../entities/validation";
 import { sign } from "jsonwebtoken";
-import { enviromentVariables } from "@app/constraints/enviroment-variables";
+import { enviromentVariables } from "../../../constraints/enviroment-variables";
 
 interface AuthAuthorUseCaseProps {
     email: string;

@@ -4,7 +4,6 @@ import { makeAuthor } from "../factory/makeAuthor";
 import { makeUserInRequest } from "../factory/makeAuthorRequest";
 import { InMemoryRepository } from "../repository/in-memory-author-repository";
 import { AuthAuthorUseCase } from "./auth-author-use-case";
-import { RegisterAuthorUseCase } from "./register-author-use-case";
 
 let authAuthorUseCase: AuthAuthorUseCase;
 let authorRepository: InMemoryRepository;
