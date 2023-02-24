@@ -2,7 +2,7 @@ import "reflect-metadata";
 import { beforeEach, describe, expect, it, vitest } from "vitest";
 import { makeUserInRequest } from "../factory/makeAuthorRequest";
 import { InMemoryRepository } from "../repository/in-memory-author-repository";
-import { RegisterAuthorUseCase } from "./register-author-use-case";
+import { RegisterAuthorUseCase } from "./register-use-case";
 import { InMemoryRedisProvider } from "@shared/container/providers/RedisProvider/implementations/in-memory-redis-provider";
 import { makeAuthor } from "../factory/makeAuthor";
 import { BadRequestError } from "@shared/errors/app-error";

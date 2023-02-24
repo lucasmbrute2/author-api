@@ -1,6 +1,6 @@
-import { RegisterAuthorController } from "../../../../application/modules/author/use-cases/register-author-controller";
+import { RegisterAuthorController } from "../../../../application/modules/author/use-cases/register-controller";
 import { Router } from "express";
-import { AuthAuthorController } from "../../../../application/modules/author/use-cases/auth-author-controller";
+import { AuthAuthorController } from "../../../../application/modules/author/use-cases/auth-controller";
 const authorRouter = Router();
 
 const registerAuthorController = new RegisterAuthorController();

@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { makeAuthor } from "../factory/makeAuthor";
 import { makeUserInRequest } from "../factory/makeAuthorRequest";
 import { InMemoryRepository } from "../repository/in-memory-author-repository";
-import { AuthAuthorUseCase } from "./auth-author-use-case";
+import { AuthAuthorUseCase } from "./auth-use-case";
 
 let authAuthorUseCase: AuthAuthorUseCase;
 let authorRepository: InMemoryRepository;

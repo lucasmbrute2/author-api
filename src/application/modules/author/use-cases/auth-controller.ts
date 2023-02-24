@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { AuthAuthorUseCase } from "./auth-author-use-case";
+import { AuthAuthorUseCase } from "./auth-use-case";
 
 interface AuthAuthorControllerProps {
     email: string;

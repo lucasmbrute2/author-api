@@ -1,7 +1,7 @@
 import { AuthorViewlModel } from "../../../views/author-view-model";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { RegisterAuthorUseCase } from "./register-author-use-case";
+import { RegisterAuthorUseCase } from "./register-use-case";
 
 interface RegisterAuthorControllerRequest {
     name: string;
