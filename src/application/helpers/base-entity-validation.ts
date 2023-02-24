@@ -2,7 +2,7 @@ export class BaseEntityValidation {
     constructor(
         private readonly input: string,
         private readonly regex: RegExp,
-        private readonly shouldValidate = true
+        private readonly shouldValidate: boolean
     ) {
         if (!this.shouldValidate) return;
         if (!this.isInputValid())
