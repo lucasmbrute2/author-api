@@ -10,7 +10,9 @@ export class InMemoryRepository implements AuthorRepository {
     }
 
     async findByEmail(email: Email): Promise<Author | null> {
-        const author = this.authors.find((author) => author.email === email);
+        const author = this.authors.find(
+            (author) => author.email.value === email.value
+        );
 
         if (!author) return null;
         return author;
