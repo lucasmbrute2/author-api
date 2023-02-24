@@ -1,0 +1,1 @@
+type nonValuable = any;

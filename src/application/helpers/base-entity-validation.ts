@@ -1,3 +1,5 @@
+import { AppError } from "../../shared/errors/app-error";
+
 export class BaseEntityValidation {
     constructor(
         private readonly input: string,
@@ -6,7 +8,10 @@ export class BaseEntityValidation {
     ) {
         if (!this.shouldValidate) return;
         if (!this.isInputValid())
-            throw new Error(`Input ${this.input} has the wrong format.`);
+            throw new AppError(
+                `Input ${this.input} has the wrong format.`,
+                400
+            );
     }
 
     private isInputValid(): boolean {
