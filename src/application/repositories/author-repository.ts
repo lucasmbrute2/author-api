@@ -1,5 +1,5 @@
-import { Author } from "@app/modules/author/entities/author-entity";
-import { Email } from "@app/modules/author/entities/validation";
+import { Author } from "../modules/author/entities/author-entity";
+import { Email } from "../../application/modules/author/entities/validation";
 
 export interface AuthorRepository {
     create(data: Author): Promise<void>;

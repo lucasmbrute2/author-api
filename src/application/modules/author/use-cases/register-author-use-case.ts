@@ -24,6 +24,7 @@ interface RegisterAuthorRepositoryResponse {
 @injectable()
 export class RegisterAuthorUseCase {
     constructor(
+        @inject("AuthorRepository")
         private authorRepository: AuthorRepository,
         @inject("RedisRepository")
         private redisClient: RedisRepository
