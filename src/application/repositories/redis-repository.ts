@@ -1,6 +1,8 @@
-import Redis from "ioredis";
-import { RedisClient } from "redis-mock";
+import { RedisClientType, SetOptions } from "@redis/client";
 
 export interface RedisRepository {
-    getClient(): Redis | RedisClient;
+    setValue(key: string, value: string, expire: number): Promise<void>;
+    getValue(key: string): Promise<string>;
+    connect(): Promise<void>;
+    disconnect(): Promise<void>;
 }
