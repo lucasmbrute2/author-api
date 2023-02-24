@@ -7,6 +7,7 @@ import { inject, injectable } from "tsyringe";
 import { sign } from "jsonwebtoken";
 import { RedisRepository } from "@app/repositories/redis-repository";
 import { enviromentVariables } from "@app/constraints/enviroment-variables";
+import { BadRequestError } from "@shared/errors/app-error";
 
 export interface RegisterAuthorRepositoryRequest {
     name: string;
@@ -37,14 +38,16 @@ export class RegisterAuthorUseCase {
         const { email, name, password, confirmPassword } = request;
 
         if (password !== confirmPassword)
-            throw new Error("The passwords are not the same");
+            throw new BadRequestError("The passwords are not the same");
 
         const validatedEmail = new Email(email);
-        const userAlreadyCreated = await this.authorRepository.findByEmail(
+
+        const authorAlreadyCreated = await this.authorRepository.findByEmail(
             validatedEmail
         );
 
-        if (userAlreadyCreated) throw new Error("User or password invalid");
+        if (authorAlreadyCreated)
+            throw new BadRequestError("User or password invalid");
 
         const author = makeAuthor({
             name: new Name(name),
