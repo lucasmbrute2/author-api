@@ -11,6 +11,7 @@ export default defineConfig({
                 "./src/application/constraints"
             ),
             "@helpers": path.resolve(__dirname, "./src/application/helpers"),
+            "@shared": path.resolve(__dirname, "./src/shared"),
         },
     },
 });
