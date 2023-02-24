@@ -1,13 +1,13 @@
-import { AuthorRepository } from "@app/repositories/author-repository";
 import { Author } from "../entities/author-entity";
 import { Email, Name, Password } from "../entities/validation";
 import { makeAuthor } from "../factory/makeAuthor";
 import { hash } from "bcryptjs";
 import { inject, injectable } from "tsyringe";
 import { sign } from "jsonwebtoken";
-import { RedisRepository } from "@app/repositories/redis-repository";
-import { enviromentVariables } from "@app/constraints/enviroment-variables";
-import { BadRequestError } from "@shared/errors/app-error";
+import { RedisRepository } from "../../../repositories/redis-repository";
+import { enviromentVariables } from "../../../constraints/enviroment-variables";
+import { BadRequestError } from "../../../../shared/errors/app-error";
+import { AuthorRepository } from "../../../repositories/author-repository";
 
 export interface RegisterAuthorRepositoryRequest {
     name: string;
