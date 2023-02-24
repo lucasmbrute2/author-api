@@ -27,7 +27,9 @@ export class RegisterAuthorUseCase {
         private redisClient: RedisRepository
     ) {}
 
-    async execute(request: RegisterAuthorRepositoryRequest) {
+    async execute(
+        request: RegisterAuthorRepositoryRequest
+    ): Promise<RegisterAuthorRepositoryResponse> {
         await this.redisClient.disconnect(); //refac
         await this.redisClient.connect();
 
@@ -67,7 +69,7 @@ export class RegisterAuthorUseCase {
         );
 
         return {
-            // author,
+            author,
             token,
         };
     }
