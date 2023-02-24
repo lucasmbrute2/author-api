@@ -32,4 +32,11 @@ export class InMemoryRepository implements AuthorRepository {
         this.authors[authorIndex] = updatedAuthor;
         return updatedAuthor;
     }
+
+    async findByID(id: string): Promise<Author> {
+        const author = this.authors.find((author) => author.id === id);
+
+        if (!author) return null;
+        return author;
+    }
 }
