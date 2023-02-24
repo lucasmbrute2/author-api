@@ -30,4 +30,19 @@ export class PrismaRepositoryAuthor implements AuthorRepository {
 
         return PrismaMapper.toDomain(author);
     }
+
+    async save(id: string, data: Author): Promise<Author> {
+        const author = await this.prisma.author.update({
+            where: {
+                id,
+            },
+            data: PrismaMapper.toPrisma(data),
+        });
+
+        return PrismaMapper.toDomain(author);
+    }
+
+    async findByID(id: string): Promise<Author> {
+        throw new Error("Method not implemented.");
+    }
 }
