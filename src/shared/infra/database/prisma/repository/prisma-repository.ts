@@ -27,6 +27,7 @@ export class PrismaRepositoryAuthor implements AuthorRepository {
         });
 
         if (!author) return null;
-        PrismaMapper.toDomain(author);
+
+        return PrismaMapper.toDomain(author);
     }
 }
