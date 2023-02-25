@@ -8,15 +8,26 @@ import { Author as rawAuthor } from "@prisma/client";
 
 export class PrismaMapper {
     static toPrisma(author: Author): rawAuthor {
+        const {
+            bio,
+            createdAt,
+            deletedAt,
+            email,
+            id,
+            name,
+            password,
+            profilePicture,
+        } = author;
+
         return {
-            id: author.id,
-            name: author.name.value,
-            bio: author.bio,
-            created_at: author.created_at,
-            deleted_at: author.deleted_at,
-            password: author.password.value,
-            profile_picture: author.profile_picture,
-            username: author.email.value,
+            id: id,
+            name: name.value,
+            bio: bio,
+            created_at: createdAt,
+            deleted_at: deletedAt,
+            password: password.value,
+            profile_picture: profilePicture,
+            username: email.value,
         };
     }
 

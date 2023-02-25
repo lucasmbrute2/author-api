@@ -6,7 +6,7 @@ import {
 } from "@app/repositories/author-repository";
 import { PrismaClient } from "@prisma/client";
 import { inject, injectable } from "tsyringe";
-import { PrismaMapper } from "../mapper/prisma-mapper";
+import { PrismaMapper } from "../mapper/prisma-author-mapper";
 
 @injectable()
 export class PrismaRepositoryAuthor implements AuthorRepository {
