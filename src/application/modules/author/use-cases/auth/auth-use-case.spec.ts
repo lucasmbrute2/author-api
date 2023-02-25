@@ -56,4 +56,17 @@ describe("Auth Author", () => {
             });
         }).not.toThrow;
     });
+
+    it("should not be able to auth a user with wrong password", () => {
+        expect(async () => {
+            const author = makeAuthor();
+            await authorRepository.create(author);
+
+            return await authAuthorUseCase.execute({
+                email: author.email.value,
+                password: "wrong-password",
+                confirmPassword: "wrong-password",
+            });
+        }).rejects.toThrow("Email or password incorrect");
+    });
 });

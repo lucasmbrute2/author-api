@@ -8,6 +8,7 @@ import { Email } from "../../entities/validation";
 import { sign } from "jsonwebtoken";
 import { enviromentVariables } from "../../../../constraints/enviroment-variables";
 import { RedisRepository } from "../../../../repositories/redis-repository";
+import { compare } from "bcryptjs";
 
 interface AuthAuthorUseCaseProps {
     email: string;
@@ -38,6 +39,14 @@ export class AuthAuthorUseCase {
         const isAuthorExistent = await this.authorRepository.findByEmail(email);
 
         if (!isAuthorExistent) throw new NotFoundError("Author not found");
+
+        const isPasswordCorrect = await compare(
+            req.password,
+            isAuthorExistent.password.value
+        );
+
+        if (!isPasswordCorrect)
+            throw new BadRequestError("Email or password incorrect");
 
         const token = sign({}, enviromentVariables.jwtTokenHash, {
             subject: isAuthorExistent.id,
