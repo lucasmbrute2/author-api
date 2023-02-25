@@ -70,7 +70,7 @@ export class RegisterAuthorUseCase {
         await this.authorRepository.create(author);
 
         await this.redisClient.setValue(
-            author.email.value,
+            author.id,
             token,
             TOKEN_EXPIRE_IN_HOURS
         );
