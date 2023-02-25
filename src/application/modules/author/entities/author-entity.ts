@@ -69,9 +69,9 @@ export class Author {
         return this.props.bio;
     }
 
-    set created_at(created_at: Date) {
-        this.props.created_at = created_at;
-    }
+    // set created_at(created_at: Date) {
+    //     this.props.created_at = created_at;
+    // }
 
     get created_at(): Date {
         return this.props.created_at;
@@ -84,6 +84,7 @@ export class Author {
     get deleted_at(): Date {
         return this.props.deleted_at;
     }
+
     set gallery_id(gallery_id: string) {
         this.props.gallery_id = gallery_id;
     }
