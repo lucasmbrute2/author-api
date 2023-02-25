@@ -61,7 +61,7 @@ export class RegisterAuthorUseCase {
 
         const token = sign({}, enviromentVariables.jwtTokenHash, {
             expiresIn: TOKEN_EXPIRE_IN_HOURS,
-            subject: JSON.stringify(author.id),
+            subject: author.id,
         });
 
         const incryptedPassword = await hash(password, 8);
