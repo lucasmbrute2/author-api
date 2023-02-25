@@ -1,4 +1,5 @@
 import { EditProfileProps } from "@app/repositories/author-repository";
+import { AuthorViewlModel } from "../../../views/author-view-model";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { EditProfileUseCase } from "./edit-profile-use-case";
@@ -12,7 +13,7 @@ export class EditProfileController {
         const { id } = req.params;
         const { bio, name, profile_picture } = req.body;
 
-        const author = await editProfileUseCase.execute(
+        const { author } = await editProfileUseCase.execute(
             {
                 bio,
                 name,
@@ -21,6 +22,6 @@ export class EditProfileController {
             id
         );
 
-        return res.status(201).json(author);
+        return res.status(201).json(AuthorViewlModel.toHTTP(author));
     }
 }
