@@ -3,7 +3,7 @@ import { resolve } from "node:path";
 import { randomBytes } from "node:crypto";
 import { AppError } from "../../shared/errors/app-error";
 
-const destination = resolve(__dirname, "..", "..", "..", "tmp");
+export const destination = resolve(__dirname, "..", "..", "..", "tmp");
 
 export const multerConfigs: multer.Options = {
     storage: diskStorage({
