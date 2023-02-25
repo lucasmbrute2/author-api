@@ -1,7 +1,7 @@
-import { RegisterAuthorController } from "../../../../application/modules/author/use-cases/register-controller";
+import { RegisterAuthorController } from "../../../../application/modules/author/use-cases/register/register-controller";
 import { Router } from "express";
-import { AuthAuthorController } from "../../../../application/modules/author/use-cases/auth-controller";
-import { EditProfileController } from "../../../../application/modules/author/use-cases/edit-profile-controller";
+import { AuthAuthorController } from "../../../../application/modules/author/use-cases/auth/auth-controller";
+import { EditProfileController } from "../../../../application/modules/author/use-cases/edit-profile/edit-profile-controller";
 import { Authorization } from "../middlewares/ensure-auth";
 const authorRouter = Router();
 

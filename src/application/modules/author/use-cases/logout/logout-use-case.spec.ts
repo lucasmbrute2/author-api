@@ -1,8 +1,8 @@
 import { InMemoryRedisProvider } from "@shared/container/providers/RedisProvider/implementations/in-memory-redis-provider";
 import { beforeEach, describe, expect, it } from "vitest";
-import { makeAuthor } from "../factory/makeAuthor";
-import { makeUserInRequest } from "../factory/makeAuthorRequest";
-import { InMemoryRepository } from "../repository/in-memory-author-repository";
+import { makeAuthor } from "../../factory/makeAuthor";
+import { makeUserInRequest } from "../../factory/makeAuthorRequest";
+import { InMemoryRepository } from "../../repository/in-memory-author-repository";
 import { LogoutUseCase } from "./logout-use-case";
 
 let logoutUseCase: LogoutUseCase;

@@ -1,17 +1,22 @@
+import { RedisProvider } from "@shared/container/providers/RedisProvider/implementations/redis-provider";
 import { BadRequestError, NotFoundError } from "@shared/errors/app-error";
 import { beforeEach, describe, expect, it } from "vitest";
-import { makeAuthor } from "../factory/makeAuthor";
-import { makeUserInRequest } from "../factory/makeAuthorRequest";
-import { InMemoryRepository } from "../repository/in-memory-author-repository";
+import { makeAuthor } from "../../factory/makeAuthor";
+import { makeUserInRequest } from "../../factory/makeAuthorRequest";
+import { InMemoryRepository } from "../../repository/in-memory-author-repository";
 import { AuthAuthorUseCase } from "./auth-use-case";
 
 let authAuthorUseCase: AuthAuthorUseCase;
 let authorRepository: InMemoryRepository;
+let redisProvider: RedisProvider;
 
 describe("Auth Author", () => {
     beforeEach(() => {
         authorRepository = new InMemoryRepository();
-        authAuthorUseCase = new AuthAuthorUseCase(authorRepository);
+        authAuthorUseCase = new AuthAuthorUseCase(
+            authorRepository,
+            redisProvider
+        );
     });
 
     it("should not able to auth a user with mismatching password", () => {

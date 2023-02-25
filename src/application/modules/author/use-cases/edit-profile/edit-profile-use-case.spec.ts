@@ -1,7 +1,7 @@
 import { NotFoundError } from "@shared/errors/app-error";
 import { beforeEach, describe, expect, it } from "vitest";
-import { makeAuthor } from "../factory/makeAuthor";
-import { InMemoryRepository } from "../repository/in-memory-author-repository";
+import { makeAuthor } from "../../factory/makeAuthor";
+import { InMemoryRepository } from "../../repository/in-memory-author-repository";
 import { EditProfileUseCase } from "./edit-profile-use-case";
 
 let authorRepository: InMemoryRepository;

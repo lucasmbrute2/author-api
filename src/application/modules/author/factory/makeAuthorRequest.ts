@@ -1,4 +1,4 @@
-import { RegisterAuthorRepositoryRequest } from "../use-cases/register-use-case";
+import { RegisterAuthorRepositoryRequest } from "../use-cases/register/register-use-case";
 
 type PartialAuthorRequest = Partial<RegisterAuthorRepositoryRequest>;
 

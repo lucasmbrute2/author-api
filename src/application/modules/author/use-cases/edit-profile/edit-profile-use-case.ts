@@ -2,11 +2,11 @@ import "reflect-metadata";
 import {
     AuthorRepository,
     EditProfileProps,
-} from "../../../repositories/author-repository";
-import { NotFoundError } from "../../../../shared/errors/app-error";
+} from "../../../../repositories/author-repository";
+import { NotFoundError } from "../../../../../shared/errors/app-error";
 import { inject, injectable } from "tsyringe";
-import { Author } from "../entities/author-entity";
-import { Name } from "../entities/validation";
+import { Author } from "../../entities/author-entity";
+import { Name } from "../../entities/validation";
 
 interface EditProfileUseCaseResponse {
     author: Author;

@@ -1,4 +1,4 @@
-import { AuthorViewlModel } from "../../../views/author-view-model";
+import { AuthorViewlModel } from "../../../../views/author-view-model";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { RegisterAuthorUseCase } from "./register-use-case";
