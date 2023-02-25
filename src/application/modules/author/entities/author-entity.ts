@@ -7,19 +7,19 @@ interface AuthorProps {
     name: Name;
     email: Email;
     password: Password;
-    profile_picture?: string;
+    profilePicture?: string;
     bio?: string;
-    created_at: Date;
-    deleted_at?: Date;
-    gallery_id?: string;
+    createdAt: Date;
+    deletedAt?: Date;
+    galleryId?: string;
 }
 
 export class Author {
-    constructor(private props: Replace<AuthorProps, { created_at?: Date }>) {
+    constructor(private props: Replace<AuthorProps, { createdAt?: Date }>) {
         this.props = {
             ...props,
             id: props.id ?? randomUUID(),
-            created_at: props.created_at ?? new Date(),
+            createdAt: props.createdAt ?? new Date(),
         };
     }
 
@@ -51,12 +51,12 @@ export class Author {
         return this.props.password;
     }
 
-    set profile_picture(profile_picture: string) {
-        this.props.profile_picture = profile_picture;
+    set profilePicture(profilePicture: string) {
+        this.props.profilePicture = profilePicture;
     }
 
-    get profile_picture(): string {
-        return this.props.profile_picture;
+    get profilePicture(): string {
+        return this.props.profilePicture;
     }
 
     set bio(bio: string) {
@@ -69,27 +69,23 @@ export class Author {
         return this.props.bio;
     }
 
-    // set created_at(created_at: Date) {
-    //     this.props.created_at = created_at;
-    // }
-
-    get created_at(): Date {
-        return this.props.created_at;
+    get createdAt(): Date {
+        return this.props.createdAt;
     }
 
-    set deleted_at(deleted_at: Date) {
-        this.props.deleted_at = deleted_at;
+    set deletedAt(deletedAt: Date) {
+        this.props.deletedAt = deletedAt;
     }
 
-    get deleted_at(): Date {
-        return this.props.deleted_at;
+    get deletedAt(): Date {
+        return this.props.deletedAt;
     }
 
-    set gallery_id(gallery_id: string) {
-        this.props.gallery_id = gallery_id;
+    set galleryId(galleryId: string) {
+        this.props.galleryId = galleryId;
     }
 
-    get gallery_id(): string {
-        return this.props.gallery_id;
+    get galleryId(): string {
+        return this.props.galleryId;
     }
 }
