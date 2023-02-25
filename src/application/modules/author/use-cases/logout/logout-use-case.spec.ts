@@ -1,5 +1,5 @@
+import { InMemoryRedisProvider } from "@shared/container/providers/redis-provider/implementations/in-memory-redis-provider";
 import "reflect-metadata";
-import { InMemoryRedisProvider } from "@shared/container/providers/RedisProvider/implementations/in-memory-redis-provider";
 import { beforeEach, describe, expect, it } from "vitest";
 import { makeAuthor } from "../../factory/makeAuthor";
 import { makeUserInRequest } from "../../factory/makeAuthorRequest";
