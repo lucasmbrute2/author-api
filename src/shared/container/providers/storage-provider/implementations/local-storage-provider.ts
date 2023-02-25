@@ -1,11 +1,21 @@
 import { StorageProvider } from "@app/repositories/storage-repository";
-import { AppError } from "../../../../errors/app-error";
+import { AppError, NotFoundError } from "../../../../errors/app-error";
 import fs from "fs";
 import { resolve } from "path";
+import { Picture } from "@app/modules/picture/entities/picture";
+import { destination } from "../../../../../application/constraints/upload";
 
 export class LocalStorageProvider implements StorageProvider {
-    async save(file: Express.Multer.File): Promise<string> {
-        return "";
+    async save(file: Picture): Promise<void> {
+        const { aliasKey: filename } = file;
+        try {
+            await fs.promises.rename(
+                resolve(destination, filename),
+                resolve(`${destination}/test`, filename)
+            );
+        } catch (error) {
+            throw new NotFoundError("Image not found");
+        }
     }
 
     async delete(file: Express.Multer.File): Promise<void> {

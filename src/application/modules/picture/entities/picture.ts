@@ -5,7 +5,7 @@ interface PictureProps {
     htmlUrl: string;
     name: string;
     aliasKey: string;
-    createdAt: Date;
+    createdAt?: Date;
     deletedAt?: Date;
     galleryId?: string;
 }
