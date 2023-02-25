@@ -28,7 +28,7 @@ export class Picture {
     }
 
     set htmlUrl(htmlUrl: string) {
-        this.props.htmlUrl;
+        this.props.htmlUrl = htmlUrl;
     }
 
     get name(): string {
@@ -36,7 +36,7 @@ export class Picture {
     }
 
     set name(name: string) {
-        this.props.name;
+        this.props.name = name;
     }
 
     get aliasKey(): string {
@@ -44,7 +44,7 @@ export class Picture {
     }
 
     set aliasKey(aliasKey: string) {
-        this.props.aliasKey;
+        this.props.aliasKey = aliasKey;
     }
 
     get createdAt(): Date {
@@ -52,7 +52,7 @@ export class Picture {
     }
 
     set deletedAt(deletedAt: Date) {
-        this.props.deletedAt;
+        this.props.deletedAt = deletedAt;
     }
     get deletedAt(): Date {
         return this.props.deletedAt;
