@@ -10,7 +10,7 @@ export class EditProfileController {
         res: Response
     ): Promise<Response> {
         const editProfileUseCase = container.resolve(EditProfileUseCase);
-        const { id } = req.params;
+        const { id } = req.userID;
         const { bio, name, profile_picture } = req.body;
 
         const { author } = await editProfileUseCase.execute(

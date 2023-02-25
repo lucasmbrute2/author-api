@@ -25,11 +25,12 @@ export class Authorization {
                 user_id as string
             );
 
+            req.userID = {
+                id: user_id as string,
+            };
             if (!isTokenAvailable) {
                 throw new Unauthorized("Missing token");
             }
-
-            req["user"] = user_id;
         } catch (error) {
             throw new Unauthorized("Missing token");
         }
