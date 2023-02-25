@@ -13,4 +13,8 @@ export class InMemoryRedisProvider implements RedisRepository {
     async getValue(key: string): Promise<string> {
         return this.redisClient.get(key);
     }
+
+    async delete(key: string): Promise<void> {
+        this.redisClient.delete(key);
+    }
 }

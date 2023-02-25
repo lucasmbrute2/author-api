@@ -1,9 +1,9 @@
 import { RegisterAuthorRepositoryRequest } from "../use-cases/register-use-case";
 
-type partialAuthorRequest = Partial<RegisterAuthorRepositoryRequest>;
+type PartialAuthorRequest = Partial<RegisterAuthorRepositoryRequest>;
 
 export function makeUserInRequest(
-    override?: partialAuthorRequest
+    override?: PartialAuthorRequest
 ): RegisterAuthorRepositoryRequest {
     return {
         email: "testemail@gmail.com",
