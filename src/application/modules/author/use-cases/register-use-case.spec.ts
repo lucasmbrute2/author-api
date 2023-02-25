@@ -61,11 +61,12 @@ describe("Register Author", () => {
 
     it("should be able to save a jwt token in memory", async () => {
         const author = makeUserInRequest();
-        const { token } = await registerAuthorUseCase.execute(author);
+        const {
+            token,
+            author: { id },
+        } = await registerAuthorUseCase.execute(author);
 
-        const storagedToken = await inMemoryRedisProvider.getValue(
-            author.email
-        );
+        const storagedToken = await inMemoryRedisProvider.getValue(id);
 
         expect(token).toEqual(storagedToken);
     });
