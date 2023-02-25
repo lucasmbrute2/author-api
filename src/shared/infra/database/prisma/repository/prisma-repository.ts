@@ -1,6 +1,9 @@
 import { Author } from "@app/modules/author/entities/author-entity";
 import { Email } from "@app/modules/author/entities/validation";
-import { AuthorRepository } from "@app/repositories/author-repository";
+import {
+    AuthorRepository,
+    EditProfileProps,
+} from "@app/repositories/author-repository";
 import { PrismaClient } from "@prisma/client";
 import { inject, injectable } from "tsyringe";
 import { PrismaMapper } from "../mapper/prisma-mapper";
@@ -31,12 +34,12 @@ export class PrismaRepositoryAuthor implements AuthorRepository {
         return PrismaMapper.toDomain(author);
     }
 
-    async save(id: string, data: Author): Promise<Author> {
+    async saveProfile(id: string, data: EditProfileProps): Promise<Author> {
         const author = await this.prisma.author.update({
             where: {
                 id,
             },
-            data: PrismaMapper.toPrisma(data),
+            data,
         });
 
         return PrismaMapper.toDomain(author);

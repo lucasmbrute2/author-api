@@ -21,11 +21,14 @@ export class PrismaMapper {
     }
 
     static toDomain(author: rawAuthor): Author {
+        const { bio, id, name, password, username } = author;
+
         return new Author({
-            id: author.id,
-            email: new Email(author.username),
-            name: new Name(author.name),
-            password: new Password(author.password),
+            id: id,
+            email: new Email(username),
+            name: new Name(name),
+            password: new Password(password),
+            bio,
         });
     }
 }

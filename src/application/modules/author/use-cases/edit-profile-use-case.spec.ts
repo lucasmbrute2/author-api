@@ -1,6 +1,5 @@
 import { NotFoundError } from "@shared/errors/app-error";
 import { beforeEach, describe, expect, it } from "vitest";
-import { Email } from "../entities/validation";
 import { makeAuthor } from "../factory/makeAuthor";
 import { InMemoryRepository } from "../repository/in-memory-author-repository";
 import { EditProfileUseCase } from "./edit-profile-use-case";
@@ -16,10 +15,7 @@ describe("Edit profile", () => {
 
     it("should return a error if user were not found", () => {
         expect(async () => {
-            await editProfileUseCase.execute({
-                data: {},
-                id: "wrong-id",
-            });
+            await editProfileUseCase.execute({}, "wrong-id");
         }).rejects.toBeInstanceOf(NotFoundError);
     });
 
@@ -27,12 +23,10 @@ describe("Edit profile", () => {
         const author = makeAuthor();
         authorRepository.create(author);
 
-        const { author: updatedAuthor } = await editProfileUseCase.execute({
-            id: author.id,
-            data: {
-                email: new Email("test-new-email@gmail.com"),
-            },
-        });
+        const { author: updatedAuthor } = await editProfileUseCase.execute(
+            { name: "new name" },
+            author.id
+        );
 
         expect(updatedAuthor.email).not.toEqual(author.email.value);
         expect(updatedAuthor).not.toEqual(author);

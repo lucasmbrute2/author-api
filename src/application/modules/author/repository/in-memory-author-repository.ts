@@ -1,6 +1,9 @@
-import { AuthorRepository } from "application/repositories/author-repository";
+import {
+    AuthorRepository,
+    EditProfileProps,
+} from "application/repositories/author-repository";
 import { Author } from "../entities/author-entity";
-import { Email } from "../entities/validation";
+import { Email, Name } from "../entities/validation";
 import { makeAuthor } from "../factory/makeAuthor";
 
 export class InMemoryRepository implements AuthorRepository {
@@ -19,18 +22,21 @@ export class InMemoryRepository implements AuthorRepository {
         return author;
     }
 
-    async save(id: string, data: Partial<Author>): Promise<Author> {
+    async saveProfile(id: string, data: EditProfileProps): Promise<Author> {
         const authorIndex = this.authors.findIndex(
             (author) => author.id === id
         );
 
-        const updatedAuthor = makeAuthor({
-            ...this.authors[authorIndex],
-            ...data,
+        const { bio, name, profile_picture } = data;
+
+        const newAuthor = makeAuthor({
+            bio: bio ?? "",
+            name: name && new Name(name),
+            profile_picture: profile_picture ?? "",
         });
 
-        this.authors[authorIndex] = updatedAuthor;
-        return updatedAuthor;
+        this.authors[authorIndex] = newAuthor;
+        return newAuthor;
     }
 
     async findByID(id: string): Promise<Author> {
