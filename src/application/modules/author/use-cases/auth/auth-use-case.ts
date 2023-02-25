@@ -1,4 +1,3 @@
-import "reflect-metadata";
 import { AuthorRepository } from "../../../../repositories/author-repository";
 import {
     BadRequestError,
