@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { Author } from "../../entities/author-entity";
 import { Email, Name, Password } from "../../entities/validation";
 import { makeAuthor } from "../../factory/makeAuthor";

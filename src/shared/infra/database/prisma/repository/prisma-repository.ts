@@ -1,5 +1,5 @@
 import { Author } from "@app/modules/author/entities/author-entity";
-import { Email } from "@app/modules/author/entities/validation";
+import { Email, Password } from "@app/modules/author/entities/validation";
 import {
     AuthorRepository,
     EditProfileProps,
@@ -55,5 +55,16 @@ export class PrismaRepositoryAuthor implements AuthorRepository {
         if (!author) return null;
 
         return PrismaMapper.toDomain(author);
+    }
+
+    async savePassword(id: string, newPassword: Password): Promise<void> {
+        await this.prisma.author.update({
+            where: {
+                id,
+            },
+            data: {
+                password: newPassword.value,
+            },
+        });
     }
 }

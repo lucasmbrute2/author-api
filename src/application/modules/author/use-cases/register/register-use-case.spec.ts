@@ -4,7 +4,7 @@ import { InMemoryRepository } from "../../repository/in-memory-author-repository
 import { RegisterAuthorUseCase } from "./register-use-case";
 import { InMemoryRedisProvider } from "@shared/container/providers/RedisProvider/implementations/in-memory-redis-provider";
 import { makeAuthor } from "../../factory/makeAuthor";
-import { BadRequestError } from "@shared/errors/app-error";
+import { BadRequestError } from "../../../../../shared/errors/app-error";
 
 let authorRepository: InMemoryRepository;
 let registerAuthorUseCase: RegisterAuthorUseCase;

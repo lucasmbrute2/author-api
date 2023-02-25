@@ -1,5 +1,9 @@
+import "reflect-metadata";
 import { RedisProvider } from "@shared/container/providers/RedisProvider/implementations/redis-provider";
-import { BadRequestError, NotFoundError } from "@shared/errors/app-error";
+import {
+    BadRequestError,
+    NotFoundError,
+} from "../../../../../shared/errors/app-error";
 import { beforeEach, describe, expect, it } from "vitest";
 import { makeAuthor } from "../../factory/makeAuthor";
 import { makeUserInRequest } from "../../factory/makeAuthorRequest";

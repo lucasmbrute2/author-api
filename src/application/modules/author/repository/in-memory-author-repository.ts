@@ -3,7 +3,7 @@ import {
     EditProfileProps,
 } from "application/repositories/author-repository";
 import { Author } from "../entities/author-entity";
-import { Email, Name } from "../entities/validation";
+import { Email, Name, Password } from "../entities/validation";
 import { makeAuthor } from "../factory/makeAuthor";
 
 export class InMemoryRepository implements AuthorRepository {
@@ -44,5 +44,13 @@ export class InMemoryRepository implements AuthorRepository {
 
         if (!author) return null;
         return author;
+    }
+
+    async savePassword(id: string, newPassword: Password): Promise<void> {
+        const authorIndex = this.authors.findIndex(
+            (author) => author.id === id
+        );
+
+        this.authors[authorIndex].password = newPassword;
     }
 }

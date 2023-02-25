@@ -1,5 +1,8 @@
 import { Author } from "../modules/author/entities/author-entity";
-import { Email } from "../../application/modules/author/entities/validation";
+import {
+    Email,
+    Password,
+} from "../../application/modules/author/entities/validation";
 
 export interface EditProfileProps {
     name?: string;
@@ -12,4 +15,5 @@ export interface AuthorRepository {
     findByEmail(email: Email): Promise<Author | null>;
     saveProfile(id: string, data: EditProfileProps): Promise<Author>;
     findByID(id: string): Promise<Author | null>;
+    savePassword(id: string, newPassword: Password): Promise<void>;
 }
