@@ -1,7 +1,9 @@
 import { RedisRepository } from "@app/repositories/redis-repository";
 import { createClient } from "redis";
 import { RedisClientType } from "@redis/client";
+import { injectable } from "tsyringe";
 
+@injectable()
 export class RedisProvider implements RedisRepository {
     public redisClient: RedisClientType;
 
