@@ -32,7 +32,7 @@ export class InMemoryRepository implements AuthorRepository {
         const newAuthor = makeAuthor({
             bio: bio ?? "",
             name: name && new Name(name),
-            profile_picture: profile_picture ?? "",
+            profilePicture: profile_picture ?? "",
         });
 
         this.authors[authorIndex] = newAuthor;
