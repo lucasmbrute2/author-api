@@ -17,6 +17,7 @@ export class PrismaMapper {
             name,
             password,
             profilePicture,
+            galleryId,
         } = author;
 
         return {
@@ -28,11 +29,21 @@ export class PrismaMapper {
             password: password.value,
             profile_picture: profilePicture,
             username: email.value,
+            galleryId,
         };
     }
 
     static toDomain(author: rawAuthor): Author {
-        const { bio, id, name, password, username } = author;
+        const {
+            bio,
+            id,
+            name,
+            password,
+            username,
+            galleryId,
+            created_at: createdAt,
+            profile_picture: profilePicture,
+        } = author;
 
         return new Author({
             id: id,
@@ -40,6 +51,9 @@ export class PrismaMapper {
             name: new Name(name),
             password: new Password(password),
             bio,
+            galleryId,
+            profilePicture,
+            createdAt,
         });
     }
 }

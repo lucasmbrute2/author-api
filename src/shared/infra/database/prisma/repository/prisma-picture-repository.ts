@@ -12,7 +12,7 @@ export class PrismaRepositoryPicture implements PictureRepository {
         this.prisma = prisma;
     }
 
-    async save(picture: Picture, authorId: string): Promise<void> {
+    async save(picture: Picture): Promise<void> {
         const prismaPicture = PrismaMapper.toPrisma(picture);
         const {
             alias_key,
@@ -24,7 +24,7 @@ export class PrismaRepositoryPicture implements PictureRepository {
             name,
         } = prismaPicture;
 
-        await this.prisma.photo.create({
+        await this.prisma.picture.create({
             data: {
                 alias_key,
                 created_at,
@@ -32,17 +32,7 @@ export class PrismaRepositoryPicture implements PictureRepository {
                 id,
                 name,
                 deleted_at,
-                gallery: {
-                    connectOrCreate: {
-                        where: {
-                            id: galleryId,
-                        },
-                        create: {
-                            id: galleryId,
-                            authorId: authorId,
-                        },
-                    },
-                },
+                galleryId,
             },
         });
     }

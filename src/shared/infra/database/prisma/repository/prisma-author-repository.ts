@@ -17,8 +17,34 @@ export class PrismaRepositoryAuthor implements AuthorRepository {
     }
 
     async create(data: Author): Promise<void> {
+        const {
+            bio,
+            created_at,
+            deleted_at,
+            galleryId,
+            id,
+            name,
+            password,
+            profile_picture,
+            username,
+        } = PrismaMapper.toPrisma(data);
+
         await this.prisma.author.create({
-            data: PrismaMapper.toPrisma(data),
+            data: {
+                gallery: {
+                    create: {
+                        id: galleryId,
+                    },
+                },
+                bio,
+                created_at,
+                deleted_at,
+                id,
+                name,
+                password,
+                profile_picture,
+                username,
+            },
         });
     }
 

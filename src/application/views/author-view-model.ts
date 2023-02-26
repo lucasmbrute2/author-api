@@ -5,6 +5,9 @@ interface AuthorViewlModelProps {
     email: string;
     id: string;
     bio: string;
+    createdAt: Date;
+    galleryId: string;
+    profilePicture: string;
 }
 
 export class AuthorViewlModel {
@@ -14,12 +17,18 @@ export class AuthorViewlModel {
             name: { value: nameValue },
             id,
             bio,
+            createdAt,
+            galleryId,
+            profilePicture,
         } = author;
         return {
             email: emailValue,
             name: nameValue,
             id,
             bio,
+            createdAt,
+            galleryId,
+            profilePicture,
         };
     }
 }
