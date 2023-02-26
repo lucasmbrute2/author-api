@@ -32,6 +32,6 @@ export class RedisProvider implements RedisRepository {
     }
 
     async delete(key: string): Promise<void> {
-        this.redisClient.del(key);
+        await this.redisClient.del(key);
     }
 }

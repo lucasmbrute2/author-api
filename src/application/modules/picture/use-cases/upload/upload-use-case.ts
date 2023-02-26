@@ -18,14 +18,13 @@ export class UploadPictureUseCase {
         private pictureRepository: PictureRepository
     ) {}
 
-    async execute(file: Picture, authorId: string) {
+    async execute(file: Express.Multer.File, authorId: string) {
         const author = await this.authorRepository.findByID(authorId);
 
         if (!author) throw new NotFoundError("Author not found");
 
         const picture = makePicture(file, author.galleryId);
         await this.storageProvider.save(picture);
-
         await this.pictureRepository.save(picture);
 
         if (!author) throw new NotFoundError("Author not found");
