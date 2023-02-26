@@ -7,12 +7,11 @@ export function makePicture(
     file?: OverridePicture,
     galleryId?: string
 ): Picture {
-    const { originalname, path, filename } = file;
     return new Picture({
         id: randomUUID(),
-        galleryId: galleryId,
-        aliasKey: filename,
-        htmlUrl: path,
-        name: originalname,
+        galleryId: galleryId || randomUUID(),
+        aliasKey: file?.filename,
+        htmlUrl: file?.path,
+        name: file?.originalname,
     });
 }
