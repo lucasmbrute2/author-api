@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Author {
-  id              String    @id @db.Uuid
+  id              String    @id
   name            String
   password        String
   created_at      DateTime  @db.Timestamp(6)
@@ -16,24 +16,28 @@ model Author {
   bio             String?   @db.VarChar
   profile_picture String?
   username        String    @unique
-  gallery         Gallery?
+
+
+  galleryId       String    @unique
+  gallery         Gallery   @relation(fields: [galleryId], references: [id])
 }
 
 model Gallery {
-  id       String @id @db.Uuid
+  id      String  @id
   api_link String?
-  authorId String @unique @db.Uuid
-  author   Author @relation(fields: [authorId], references: [id])
-  photo    Photo?
+ 
+  author   Author?
+  photo    Picture[]
 }
 
-model Photo {
-  id         String    @id @db.Uuid
+model Picture {
+  id         String    @id
   html_url   String
   name       String
   alias_key  String    @unique
   created_at DateTime  @db.Timestamp(6)
   deleted_at DateTime? @db.Timestamp(6)
-  galleryId  String    @unique @db.Uuid
+
+  galleryId  String
   gallery    Gallery   @relation(fields: [galleryId], references: [id])
 }
