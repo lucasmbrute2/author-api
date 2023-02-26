@@ -14,8 +14,9 @@ export class Picture {
     constructor(private props: PictureProps) {
         this.props = {
             ...props,
-            id: props.id ?? randomUUID(),
-            galleryId: props.galleryId ?? randomUUID(),
+            id: props.id || randomUUID(),
+            galleryId: props.galleryId || randomUUID(),
+            createdAt: props.createdAt || new Date(),
         };
     }
 
