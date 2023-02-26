@@ -22,7 +22,7 @@ describe("Edit profile", () => {
 
     it("should be able to edit a profile", async () => {
         const author = makeAuthor();
-        authorRepository.create(author);
+        await authorRepository.create(author);
 
         const { author: updatedAuthor } = await editProfileUseCase.execute(
             { name: "new name" },
