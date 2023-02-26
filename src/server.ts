@@ -4,18 +4,16 @@ import { AppError } from "./shared/errors/app-error";
 import "express-async-errors";
 import { route } from "./shared/infra/http/routes";
 import "./shared/container/index";
+import path from "path";
 
 const app = express();
 
 app.use(express.json());
 app.use(route);
-// app.get("/host/:id", (req, res) => {
-//     console.log(req.originalUrl);
-
-//     return res.json({
-//         message: "Hello world",
-//     });
-// });
+app.use(
+    "/picture/upload",
+    express.static(path.resolve(__dirname, "..", "tmp"))
+);
 
 app.use(
     (
