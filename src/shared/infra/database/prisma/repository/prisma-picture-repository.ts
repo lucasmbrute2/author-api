@@ -55,4 +55,30 @@ export class PrismaRepositoryPicture implements PictureRepository {
             },
         });
     }
+
+    async getByGalleryId(
+        page: number,
+        take: number,
+        galleryId: string
+    ): Promise<Picture[]> {
+        const skip = (page - 1) * take;
+
+        const pictures = await this.prisma.picture.findMany({
+            where: {
+                NOT: {
+                    deleted_at: {
+                        not: null,
+                    },
+                },
+                galleryId,
+            },
+            skip,
+            take,
+            orderBy: {
+                created_at: "desc",
+            },
+        });
+
+        return pictures.map(PrismaMapper.toDomain);
+    }
 }

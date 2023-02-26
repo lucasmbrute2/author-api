@@ -1,4 +1,4 @@
-import { PictureRepository } from "@app/repositories/picture-repository";
+import { PictureRepository } from "../../../repositories/picture-repository";
 import { Picture } from "../entities/picture";
 
 interface Gallery {
@@ -20,6 +20,9 @@ export class InMemoryPictureRepository implements PictureRepository {
     }
 
     async delete(pictureName: string): Promise<void> {
+        throw new Error("Method not implemented.");
+    }
+    async getByGalleryId(page: number, take: number): Promise<Picture[]> {
         throw new Error("Method not implemented.");
     }
 }
