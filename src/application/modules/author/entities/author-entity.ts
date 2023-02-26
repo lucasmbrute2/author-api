@@ -17,9 +17,7 @@ interface AuthorProps {
 
 export class Author {
     constructor(private props: Replace<AuthorProps, { createdAt?: Date }>) {
-        this.props = {
-            ...props,
-        };
+        this.props = props;
         this._createdAt();
         this._galleryId();
     }

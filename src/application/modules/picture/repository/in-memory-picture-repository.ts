@@ -22,7 +22,7 @@ export class InMemoryPictureRepository implements PictureRepository {
     async delete(pictureName: string): Promise<void> {
         throw new Error("Method not implemented.");
     }
-    async getByGalleryId(page: number, take: number): Promise<Picture[]> {
+    async getByGalleryId(page: number): Promise<Picture[]> {
         throw new Error("Method not implemented.");
     }
 }

@@ -56,12 +56,9 @@ export class PrismaRepositoryPicture implements PictureRepository {
         });
     }
 
-    async getByGalleryId(
-        page: number,
-        take: number,
-        galleryId: string
-    ): Promise<Picture[]> {
-        const skip = (page - 1) * take;
+    async getByGalleryId(page: number, galleryId: string): Promise<Picture[]> {
+        const NUMBERS_OF_PICTURES_TO_DISPLAY = 6;
+        const skip = (page - 1) * NUMBERS_OF_PICTURES_TO_DISPLAY;
 
         const pictures = await this.prisma.picture.findMany({
             where: {
@@ -73,7 +70,7 @@ export class PrismaRepositoryPicture implements PictureRepository {
                 galleryId,
             },
             skip,
-            take,
+            take: NUMBERS_OF_PICTURES_TO_DISPLAY,
             orderBy: {
                 created_at: "desc",
             },
