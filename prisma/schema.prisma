@@ -21,7 +21,7 @@ model Author {
 
 model Gallery {
   id       String @id @db.Uuid
-  api_link String
+  api_link String?
   authorId String @unique @db.Uuid
   author   Author @relation(fields: [authorId], references: [id])
   photo    Photo?
