@@ -21,7 +21,7 @@ export class PrismaMapper {
         } = author;
 
         return {
-            id: id,
+            id,
             name: name.value,
             bio: bio,
             created_at: createdAt,
@@ -46,7 +46,7 @@ export class PrismaMapper {
         } = author;
 
         return new Author({
-            id: id,
+            id,
             email: new Email(username),
             name: new Name(name),
             password: new Password(password),

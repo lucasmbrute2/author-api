@@ -1,3 +1,4 @@
+import { randomUUID } from "crypto";
 import { Picture } from "../entities/picture";
 
 type OverridePicture = Partial<Express.Multer.File> & Picture;
@@ -8,6 +9,7 @@ export function makePicture(
 ): Picture {
     const { originalname, path, filename } = file;
     return new Picture({
+        id: randomUUID(),
         galleryId: galleryId,
         aliasKey: filename,
         htmlUrl: path,

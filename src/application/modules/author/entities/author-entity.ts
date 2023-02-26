@@ -25,7 +25,7 @@ export class Author {
     }
 
     _id() {
-        if (this.props.id) throw new AppError("ID already has a value", 400);
+        if (this.props.id) return;
         this.props.id = randomUUID();
     }
 
@@ -76,8 +76,7 @@ export class Author {
     }
 
     _createdAt() {
-        if (this.props.createdAt)
-            throw new AppError("Date already has a value", 400);
+        if (this.props.createdAt) return;
 
         this.props.createdAt = new Date();
     }
@@ -95,8 +94,7 @@ export class Author {
     }
 
     _galleryId() {
-        if (this.props.galleryId)
-            throw new AppError("Already exists gallery ID", 400);
+        if (this.props.galleryId) return;
 
         this.props.galleryId = randomUUID();
     }

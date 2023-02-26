@@ -8,9 +8,9 @@ export class PrismaMapper {
             createdAt: created_at,
             deletedAt: deleted_at,
             htmlUrl: html_url,
-            id,
             name,
             galleryId,
+            id,
         } = picture;
         return {
             alias_key,
