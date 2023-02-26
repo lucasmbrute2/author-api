@@ -39,5 +39,7 @@ model Picture {
   deleted_at DateTime? @db.Timestamp(6)
 
   galleryId  String
-  gallery    Gallery   @relation(fields: [galleryId], references: [id])
+  gallery    Gallery   @relation(fields: [galleryId], references: [id], onDelete: Cascade)
+
+  @@index([galleryId])
 }
