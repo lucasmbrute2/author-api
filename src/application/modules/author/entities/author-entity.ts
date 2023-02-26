@@ -1,9 +1,10 @@
 import { Replace } from "@helpers/Replace";
 import { randomUUID } from "node:crypto";
 import { Email, Name, Password } from "@modules/author/entities/validation";
+import { AppError } from "../../../../shared/errors/app-error";
 
 interface AuthorProps {
-    id?: string;
+    id: string;
     name: Name;
     email: Email;
     password: Password;
@@ -18,9 +19,14 @@ export class Author {
     constructor(private props: Replace<AuthorProps, { createdAt?: Date }>) {
         this.props = {
             ...props,
-            id: props.id ?? randomUUID(),
-            createdAt: props.createdAt ?? new Date(),
         };
+        this._createdAt();
+        this._galleryId();
+    }
+
+    _id() {
+        if (this.props.id) throw new AppError("ID already has a value", 400);
+        this.props.id = randomUUID();
     }
 
     get id(): string {
@@ -69,6 +75,13 @@ export class Author {
         return this.props.bio;
     }
 
+    _createdAt() {
+        if (this.props.createdAt)
+            throw new AppError("Date already has a value", 400);
+
+        this.props.createdAt = new Date();
+    }
+
     get createdAt(): Date {
         return this.props.createdAt;
     }
@@ -81,8 +94,11 @@ export class Author {
         return this.props.deletedAt;
     }
 
-    set galleryId(galleryId: string) {
-        this.props.galleryId = galleryId;
+    _galleryId() {
+        if (this.props.galleryId)
+            throw new AppError("Already exists gallery ID", 400);
+
+        this.props.galleryId = randomUUID();
     }
 
     get galleryId(): string {
