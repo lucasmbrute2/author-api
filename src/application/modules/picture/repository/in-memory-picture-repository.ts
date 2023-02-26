@@ -14,4 +14,12 @@ export class InMemoryPictureRepository implements PictureRepository {
         this.pictures.push(picture);
         this.gallery.push({ id: picture.galleryId, authorId });
     }
+
+    async findByName(pictureName: string): Promise<void | Picture> {
+        throw new Error("Method not implemented.");
+    }
+
+    async delete(pictureName: string): Promise<void> {
+        throw new Error("Method not implemented.");
+    }
 }

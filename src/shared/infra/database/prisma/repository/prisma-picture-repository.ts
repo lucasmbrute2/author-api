@@ -36,4 +36,23 @@ export class PrismaRepositoryPicture implements PictureRepository {
             },
         });
     }
+
+    async findByName(pictureName: string): Promise<null | Picture> {
+        const picture = await this.prisma.picture.findUnique({
+            where: {
+                alias_key: pictureName,
+            },
+        });
+
+        if (!picture) return null;
+        return PrismaMapper.toDomain(picture);
+    }
+
+    async delete(pictureName: string): Promise<void> {
+        await this.prisma.picture.delete({
+            where: {
+                alias_key: pictureName,
+            },
+        });
+    }
 }
