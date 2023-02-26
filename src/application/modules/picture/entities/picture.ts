@@ -1,4 +1,3 @@
-import { AppError } from "../../../../shared/errors/app-error";
 import { randomUUID } from "crypto";
 
 interface PictureProps {
@@ -13,10 +12,7 @@ interface PictureProps {
 
 export class Picture {
     constructor(private props: PictureProps) {
-        this.props = {
-            ...props,
-            createdAt: props.createdAt || new Date(),
-        };
+        this.props = props;
         this._galleryId();
         this._createdAt();
     }
