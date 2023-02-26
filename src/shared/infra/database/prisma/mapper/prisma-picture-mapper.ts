@@ -1,4 +1,4 @@
-import { Picture } from "@app/modules/picture/entities/picture";
+import { Picture } from "../../../../../application/modules/picture/entities/picture";
 import { Picture as pictureRaw } from "@prisma/client";
 
 export class PrismaMapper {
@@ -21,5 +21,25 @@ export class PrismaMapper {
             name,
             galleryId,
         };
+    }
+    static toDomain(picture: pictureRaw): Picture {
+        const {
+            alias_key: aliasKey,
+            created_at: createdAt,
+            deleted_at: deletedAt,
+            galleryId,
+            html_url: htmlUrl,
+            id,
+            name,
+        } = picture;
+        return new Picture({
+            aliasKey,
+            htmlUrl,
+            id,
+            name,
+            createdAt,
+            deletedAt,
+            galleryId,
+        });
     }
 }
