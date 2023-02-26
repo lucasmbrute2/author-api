@@ -1,7 +1,8 @@
+import { AppError } from "@shared/errors/app-error";
 import { randomUUID } from "crypto";
 
 interface PictureProps {
-    id?: string;
+    id: string;
     htmlUrl: string;
     name: string;
     aliasKey: string;
@@ -14,13 +15,14 @@ export class Picture {
     constructor(private props: PictureProps) {
         this.props = {
             ...props,
-            id: props.id || randomUUID(),
-            galleryId: props.galleryId || randomUUID(),
             createdAt: props.createdAt || new Date(),
         };
+        this._galleryId();
+        this._createdAt();
     }
 
-    get id(): string {
+    _id(): string {
+        if (this.props.id) throw new AppError("ID already exists", 400);
         return this.props.id;
     }
 
@@ -52,6 +54,11 @@ export class Picture {
         return this.props.createdAt;
     }
 
+    _createdAt() {
+        if (this.props.createdAt) throw new AppError("ID already exists", 400);
+        this.props.createdAt = new Date();
+    }
+
     set deletedAt(deletedAt: Date) {
         this.props.deletedAt = deletedAt;
     }
@@ -61,5 +68,10 @@ export class Picture {
 
     get galleryId(): string {
         return this.props.galleryId;
+    }
+
+    _galleryId() {
+        if (this.props.galleryId) throw new AppError("ID already exists", 400);
+        this.props.galleryId = randomUUID();
     }
 }
