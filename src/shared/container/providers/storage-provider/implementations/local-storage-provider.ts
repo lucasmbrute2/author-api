@@ -11,7 +11,7 @@ export class LocalStorageProvider implements StorageProvider {
         try {
             await fs.promises.rename(
                 resolve(destination, filename),
-                resolve(`${destination}/test`, filename)
+                resolve(`${destination}`, filename)
             );
         } catch (error) {
             throw new NotFoundError("Image not found");
