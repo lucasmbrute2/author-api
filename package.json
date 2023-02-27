@@ -20,7 +20,8 @@
     },
     "scripts": {
         "start:dev": "ts-node-dev --transpile-only --respawn -r tsconfig-paths/register src/server.ts",
-        "test": "vitest"
+        "test": "vitest",
+        "build": "tsc build"
     },
     "dependencies": {
         "@prisma/client": "^4.10.1",
