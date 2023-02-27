@@ -60,8 +60,10 @@ export class Picture {
     }
 
     set deletedAt(deletedAt: Date) {
+        if (this.props.galleryId) return;
         this.props.deletedAt = deletedAt;
     }
+
     get deletedAt(): Date {
         return this.props.deletedAt;
     }
