@@ -2,7 +2,6 @@
     "name": "author-api",
     "version": "1.0.0",
     "main": "index.js",
-    "type": "module",
     "author": "Lucas Victor de Souza Dantas <68877260+lucasmbrute2@users.noreply.github.com>",
     "license": "MIT",
     "devDependencies": {
