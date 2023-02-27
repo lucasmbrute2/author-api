@@ -11,4 +11,7 @@ export const enviromentVariables = {
         accessKeyId: process.env.AWS_ACCESS_KEY_ID,
         region: process.env.AWS_DEFAULT_REGION,
     },
+    redis: {
+        url: process.env.REDIS_URL,
+    },
 };

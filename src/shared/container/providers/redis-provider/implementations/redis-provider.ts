@@ -2,13 +2,16 @@ import { RedisRepository } from "@app/repositories/redis-repository";
 import { createClient } from "redis";
 import { RedisClientType } from "@redis/client";
 import { injectable } from "tsyringe";
+import { enviromentVariables } from "@app/constraints/enviroment-variables";
 
 @injectable()
 export class RedisProvider implements RedisRepository {
     public redisClient: RedisClientType;
 
     constructor() {
-        this.redisClient = createClient();
+        this.redisClient = createClient({
+            url: enviromentVariables.redis.url,
+        });
     }
 
     async disconnect(): Promise<void> {
