@@ -5,7 +5,7 @@ import { Router } from "express";
 import multer from "multer";
 import { Authorization } from "../middlewares/ensure-auth";
 import { DeleteController } from "../../../../application/modules/picture/use-cases/delete/delete-controller";
-import { ListByGalleryIdController } from "../../../../application/modules/picture/use-cases/list-all/list-by-gallery-id-controller";
+import { ListByGalleryIdController } from "../../../../application/modules/picture/use-cases/list-by-gallery-id/list-by-gallery-id-controller";
 import { SoftDeleteController } from "../../../../application/modules/picture/use-cases/soft-delete/soft-delete-controller";
 
 const pictureRoutes = Router();
