@@ -25,4 +25,10 @@ export class InMemoryPictureRepository implements PictureRepository {
     async getByGalleryId(page: number): Promise<Picture[]> {
         throw new Error("Method not implemented.");
     }
+    async softDelete(pictureName: string): Promise<void> {
+        throw new Error("Method not implemented.");
+    }
+    async getAll(page: number): Promise<Picture[]> {
+        throw new Error("Method not implemented.");
+    }
 }

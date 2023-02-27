@@ -6,4 +6,5 @@ export interface PictureRepository {
     save(picture: Picture, authorId?: string): Promise<void>;
     delete(pictureName: string): Promise<void>;
     softDelete(pictureName: string): Promise<void>;
+    getAll(page: number): Promise<Picture[]>;
 }

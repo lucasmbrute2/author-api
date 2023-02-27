@@ -90,4 +90,26 @@ export class PrismaRepositoryPicture implements PictureRepository {
             },
         });
     }
+
+    async getAll(page: number): Promise<Picture[]> {
+        const NUMBERS_OF_PICTURES_TO_DISPLAY = 6;
+        const skip = (page - 1) * NUMBERS_OF_PICTURES_TO_DISPLAY;
+
+        const pictures = await this.prisma.picture.findMany({
+            where: {
+                NOT: {
+                    deleted_at: {
+                        not: null,
+                    },
+                },
+            },
+            skip,
+            take: NUMBERS_OF_PICTURES_TO_DISPLAY,
+            orderBy: {
+                created_at: "asc",
+            },
+        });
+
+        return pictures.map(PrismaMapper.toDomain);
+    }
 }
