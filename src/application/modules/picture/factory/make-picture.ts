@@ -1,4 +1,4 @@
-import { randomUUID } from "crypto";
+import { randomUUID } from "node:crypto";
 import { Picture } from "../entities/picture";
 
 type OverridePicture = Partial<Express.Multer.File> & Partial<Picture>;

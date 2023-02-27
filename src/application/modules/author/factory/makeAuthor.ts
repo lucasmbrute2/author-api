@@ -1,4 +1,4 @@
-import { randomUUID } from "crypto";
+import { randomUUID } from "node:crypto";
 import { Author } from "../entities/author-entity";
 import { Email, Name, Password } from "../entities/validation";
 

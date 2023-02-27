@@ -1,10 +1,10 @@
+import { AuthorRepository } from "@app/repositories/author-repository";
+import { PictureRepository } from "@app/repositories/picture-repository";
+import { StorageProvider } from "@app/repositories/storage-repository";
+import { NotFoundError } from "@shared/errors/app-error";
 import "reflect-metadata";
-import { AuthorRepository } from "../../../../repositories/author-repository";
-import { StorageProvider } from "../../../../repositories/storage-repository";
-import { NotFoundError } from "../../../../../shared/errors/app-error";
 import { inject, injectable } from "tsyringe";
 import { makePicture } from "../../factory/make-picture";
-import { PictureRepository } from "../../../../repositories/picture-repository";
 
 @injectable()
 export class UploadPictureUseCase {

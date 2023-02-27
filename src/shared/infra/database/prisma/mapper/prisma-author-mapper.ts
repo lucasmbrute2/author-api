@@ -1,9 +1,5 @@
-import { Author } from "../../../../../application/modules/author/entities/author-entity";
-import {
-    Email,
-    Name,
-    Password,
-} from "../../../../../application/modules/author/entities/validation";
+import { Author } from "@app/modules/author/entities/author-entity";
+import { Email, Name, Password } from "@app/modules/author/entities/validation";
 import { Author as rawAuthor } from "@prisma/client";
 
 export class PrismaMapper {

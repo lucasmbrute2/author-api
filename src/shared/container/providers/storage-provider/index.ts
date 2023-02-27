@@ -1,4 +1,4 @@
-import { enviromentVariables } from "../../../../application/constraints/enviroment-variables";
+import { enviromentVariables } from "@app/constraints/enviroment-variables";
 import { StorageProvider } from "@app/repositories/storage-repository";
 import { container } from "tsyringe";
 import { LocalStorageProvider } from "./implementations/local-storage-provider";

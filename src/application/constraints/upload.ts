@@ -1,7 +1,7 @@
 import multer, { diskStorage } from "multer";
 import { resolve } from "node:path";
 import { randomBytes } from "node:crypto";
-import { AppError } from "../../shared/errors/app-error";
+import { AppError } from "@shared/errors/app-error";
 
 export const destination = resolve(__dirname, "..", "..", "..", "tmp");
 

@@ -1,5 +1,5 @@
-import { EditProfileProps } from "../../../../../application/repositories/author-repository";
-import { AuthorViewlModel } from "../../../../views/author-view-model";
+import { EditProfileProps } from "@app/repositories/author-repository";
+import { AuthorViewlModel } from "@app/views/author-view-model";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { EditProfileUseCase } from "./edit-profile-use-case";

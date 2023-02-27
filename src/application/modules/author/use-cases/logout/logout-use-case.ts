@@ -1,6 +1,6 @@
-import { AuthorRepository } from "../../../../repositories/author-repository";
-import { RedisRepository } from "../../../../repositories/redis-repository";
-import { NotFoundError } from "../../../../../shared/errors/app-error";
+import { AuthorRepository } from "@app/repositories/author-repository";
+import { RedisRepository } from "@app/repositories/redis-repository";
+import { NotFoundError } from "@shared/errors/app-error";
 import { inject, injectable } from "tsyringe";
 
 @injectable()

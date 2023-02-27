@@ -1,13 +1,13 @@
-import { multerConfigs } from "../../../../application/constraints/upload";
-import { UploadController } from "../../../../application/modules/picture/use-cases/upload/upload-controller";
+import { multerConfigs } from "@app/constraints/upload";
+import { DeleteController } from "@app/modules/picture/use-cases/delete/delete-controller";
+import { ListAllController } from "@app/modules/picture/use-cases/list-all/list-all-controller";
+import { ListByGalleryIdController } from "@app/modules/picture/use-cases/list-by-gallery-id/list-by-gallery-id-controller";
+import { SoftDeleteController } from "@app/modules/picture/use-cases/soft-delete/soft-delete-controller";
+import { UploadController } from "@app/modules/picture/use-cases/upload/upload-controller";
 import { Router } from "express";
 
 import multer from "multer";
 import { Authorization } from "../middlewares/ensure-auth";
-import { DeleteController } from "../../../../application/modules/picture/use-cases/delete/delete-controller";
-import { ListByGalleryIdController } from "../../../../application/modules/picture/use-cases/list-by-gallery-id/list-by-gallery-id-controller";
-import { SoftDeleteController } from "../../../../application/modules/picture/use-cases/soft-delete/soft-delete-controller";
-import { ListAllController } from "../../../../application/modules/picture/use-cases/list-all/list-all-controller";
 
 const pictureRoutes = Router();
 const upload = multer(multerConfigs);

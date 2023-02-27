@@ -1,16 +1,12 @@
-"import reflect-metadata";
-import { InMemoryRepository } from "../../../../../application/modules/author/repository/in-memory-author-repository";
-import {
-    AppError,
-    BadRequestError,
-    NotFoundError,
-} from "../../../../../shared/errors/app-error";
+import "reflect-metadata";
+import { makeAuthor } from "@app/modules/author/factory/makeAuthor";
+import { InMemoryRepository } from "@app/modules/author/repository/in-memory-author-repository";
+import { LocalStorageProvider } from "@shared/container/providers/storage-provider/implementations/local-storage-provider";
+import { BadRequestError, NotFoundError } from "@shared/errors/app-error";
 import { beforeEach, describe, expect, it } from "vitest";
 import { makePicture } from "../../factory/make-picture";
 import { InMemoryPictureRepository } from "../../repository/in-memory-picture-repository";
 import { DeleteUseCase } from "./delete-use-case";
-import { LocalStorageProvider } from "@shared/container/providers/storage-provider/implementations/local-storage-provider";
-import { makeAuthor } from "@app/modules/author/factory/makeAuthor";
 
 let inMemoryAuthorRepository: InMemoryRepository;
 let inMemoryPictureRepository: InMemoryPictureRepository;

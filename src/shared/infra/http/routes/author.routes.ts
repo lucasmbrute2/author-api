@@ -1,10 +1,10 @@
-import { RegisterAuthorController } from "../../../../application/modules/author/use-cases/register/register-controller";
+import { AuthAuthorController } from "@app/modules/author/use-cases/auth/auth-controller";
+import { EditProfileController } from "@app/modules/author/use-cases/edit-profile/edit-profile-controller";
+import { LogoutController } from "@app/modules/author/use-cases/logout/logout-controller";
+import { RegisterAuthorController } from "@app/modules/author/use-cases/register/register-controller";
+import { ResetPasswordController } from "@app/modules/author/use-cases/reset-password/reset-password-controller";
 import { Router } from "express";
-import { AuthAuthorController } from "../../../../application/modules/author/use-cases/auth/auth-controller";
-import { EditProfileController } from "../../../../application/modules/author/use-cases/edit-profile/edit-profile-controller";
 import { Authorization } from "../middlewares/ensure-auth";
-import { LogoutController } from "../../../../application/modules/author/use-cases/logout/logout-controller";
-import { ResetPasswordController } from "../../../../application/modules/author/use-cases/reset-password/reset-password-controller";
 const authorRouter = Router();
 
 const registerAuthorController = new RegisterAuthorController();

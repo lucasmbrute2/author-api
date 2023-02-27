@@ -1,5 +1,5 @@
+import { NotFoundError } from "@shared/errors/app-error";
 import "reflect-metadata";
-import { NotFoundError } from "../../../../../shared/errors/app-error";
 import { beforeEach, describe, expect, it } from "vitest";
 import { makeAuthor } from "../../factory/makeAuthor";
 import { InMemoryRepository } from "../../repository/in-memory-author-repository";

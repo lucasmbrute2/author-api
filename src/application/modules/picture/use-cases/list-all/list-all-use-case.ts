@@ -1,5 +1,5 @@
-import { PictureRepository } from "../../../../repositories/picture-repository";
-import { BadRequestError } from "../../../../../shared/errors/app-error";
+import { PictureRepository } from "@app/repositories/picture-repository";
+import { BadRequestError } from "@shared/errors/app-error";
 import { inject, injectable } from "tsyringe";
 import { Picture } from "../../entities/picture";
 

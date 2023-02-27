@@ -1,12 +1,8 @@
-import "reflect-metadata";
-import { AuthorRepository } from "../../../../repositories/author-repository";
-import { PictureRepository } from "../../../../repositories/picture-repository";
-import {
-    BadRequestError,
-    NotFoundError,
-} from "../../../../../shared/errors/app-error";
+import { AuthorRepository } from "@app/repositories/author-repository";
+import { PictureRepository } from "@app/repositories/picture-repository";
+import { StorageProvider } from "@app/repositories/storage-repository";
+import { BadRequestError, NotFoundError } from "@shared/errors/app-error";
 import { inject, injectable } from "tsyringe";
-import { StorageProvider } from "../../../../repositories/storage-repository";
 
 @injectable()
 export class DeleteUseCase {

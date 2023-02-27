@@ -1,8 +1,8 @@
 import {
     AuthorRepository,
     EditProfileProps,
-} from "../../../../repositories/author-repository";
-import { NotFoundError } from "../../../../../shared/errors/app-error";
+} from "@app/repositories/author-repository";
+import { NotFoundError } from "@shared/errors/app-error";
 import { inject, injectable } from "tsyringe";
 import { Author } from "../../entities/author-entity";
 import { Name } from "../../entities/validation";

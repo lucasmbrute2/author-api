@@ -1,10 +1,10 @@
 import { beforeEach, describe, expect, it, vitest } from "vitest";
 import { makeUserInRequest } from "../../factory/makeAuthorRequest";
-import { InMemoryRepository } from "../../repository/in-memory-author-repository";
 import { RegisterAuthorUseCase } from "./register-use-case";
-import { makeAuthor } from "../../factory/makeAuthor";
-import { BadRequestError } from "../../../../../shared/errors/app-error";
 import { InMemoryRedisProvider } from "@shared/container/providers/redis-provider/implementations/in-memory-redis-provider";
+import { InMemoryRepository } from "../../repository/in-memory-author-repository";
+import { makeAuthor } from "../../factory/makeAuthor";
+import { BadRequestError } from "@shared/errors/app-error";
 
 let authorRepository: InMemoryRepository;
 let registerAuthorUseCase: RegisterAuthorUseCase;

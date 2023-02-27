@@ -1,9 +1,6 @@
-import { AuthorRepository } from "../../../../repositories/author-repository";
-import { PictureRepository } from "../../../../repositories/picture-repository";
-import {
-    BadRequestError,
-    NotFoundError,
-} from "../../../../../shared/errors/app-error";
+import { AuthorRepository } from "@app/repositories/author-repository";
+import { PictureRepository } from "@app/repositories/picture-repository";
+import { BadRequestError, NotFoundError } from "@shared/errors/app-error";
 import { inject, injectable } from "tsyringe";
 import { Picture } from "../../entities/picture";
 

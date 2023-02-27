@@ -1,7 +1,7 @@
+import "reflect-metadata";
 import {
     AppError,
     BadRequestError,
-    NotFoundError,
     Unauthorized,
 } from "@shared/errors/app-error";
 import { beforeEach, describe, expect, it, test } from "vitest";

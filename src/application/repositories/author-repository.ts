@@ -1,8 +1,5 @@
+import { Email, Password } from "@app/modules/author/entities/validation";
 import { Author } from "../modules/author/entities/author-entity";
-import {
-    Email,
-    Password,
-} from "../../application/modules/author/entities/validation";
 
 export interface EditProfileProps {
     name?: string;

@@ -1,9 +1,9 @@
-import { enviromentVariables } from "../../../../application/constraints/enviroment-variables";
-import { Unauthorized } from "../../../../shared/errors/app-error";
+import { enviromentVariables } from "@app/constraints/enviroment-variables";
+import { RedisProvider } from "@shared/container/providers/redis-provider/implementations/redis-provider";
+import { Unauthorized } from "@shared/errors/app-error";
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 import { container } from "tsyringe";
-import { RedisProvider } from "../../../../shared/container/providers/redis-provider/implementations/redis-provider";
 
 export class Authorization {
     async ensureAuth(req: Request, res: Response, next: NextFunction) {

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { makeAuthor } from "@modules/author/factory/makeAuthor";
-import { Email, Name, Password } from "@modules/author/entities/validation";
+import { makeAuthor } from "../factory/makeAuthor";
+import { Email, Name, Password } from "./validation";
 
 describe("Author entity", () => {
     it("should be able to instace an Author", () => {

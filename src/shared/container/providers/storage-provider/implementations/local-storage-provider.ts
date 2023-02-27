@@ -1,8 +1,8 @@
+import { Picture } from "@app/modules/picture/entities/picture";
 import { StorageProvider } from "@app/repositories/storage-repository";
-import { AppError } from "../../../../errors/app-error";
+import { AppError } from "@shared/errors/app-error";
 import fs from "fs";
 import { resolve } from "path";
-import { Picture } from "../../../../../application/modules/picture/entities/picture";
 
 export class LocalStorageProvider implements StorageProvider {
     async save(file: Picture): Promise<void> {}

@@ -1,7 +1,7 @@
 import {
     AuthorRepository,
     EditProfileProps,
-} from "application/repositories/author-repository";
+} from "@app/repositories/author-repository";
 import { Author } from "../entities/author-entity";
 import { Email, Name, Password } from "../entities/validation";
 import { makeAuthor } from "../factory/makeAuthor";

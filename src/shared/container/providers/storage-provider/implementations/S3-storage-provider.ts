@@ -1,10 +1,10 @@
-import { enviromentVariables } from "../../../../../application/constraints/enviroment-variables";
 import { Picture } from "@app/modules/picture/entities/picture";
 import { StorageProvider } from "@app/repositories/storage-repository";
 import { S3 } from "aws-sdk";
 import mime from "mime";
 import fs from "fs";
 import { resolve } from "path";
+import { enviromentVariables } from "@app/constraints/enviroment-variables";
 
 export class S3StorageProvider implements StorageProvider {
     private client: S3;

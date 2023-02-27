@@ -1,7 +1,6 @@
-import { Replace } from "@helpers/Replace";
+import { Replace } from "@app/helpers/Replace";
 import { randomUUID } from "node:crypto";
-import { Email, Name, Password } from "@modules/author/entities/validation";
-import { AppError } from "../../../../shared/errors/app-error";
+import { Email, Name, Password } from "./validation";
 
 interface AuthorProps {
     id: string;

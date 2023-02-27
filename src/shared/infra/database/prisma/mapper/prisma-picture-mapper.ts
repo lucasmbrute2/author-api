@@ -1,4 +1,4 @@
-import { Picture } from "../../../../../application/modules/picture/entities/picture";
+import { Picture } from "@app/modules/picture/entities/picture";
 import { Picture as pictureRaw } from "@prisma/client";
 
 export class PrismaMapper {

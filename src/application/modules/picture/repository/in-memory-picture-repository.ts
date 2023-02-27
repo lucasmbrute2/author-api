@@ -1,4 +1,4 @@
-import { PictureRepository } from "../../../repositories/picture-repository";
+import { PictureRepository } from "@app/repositories/picture-repository";
 import { Picture } from "../entities/picture";
 
 interface Gallery {

@@ -1,4 +1,4 @@
-import { PictureViewModel } from "../../../../views/picture-view-model";
+import { PictureViewModel } from "@app/views/picture-view-model";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { UploadPictureUseCase } from "./upload-use-case";

@@ -1,13 +1,12 @@
-import "reflect-metadata";
-import { AuthorRepository } from "../../../../repositories/author-repository";
+import { inject, injectable } from "tsyringe";
+import { compare, hash } from "bcryptjs";
+import { Password } from "../../entities/validation";
+import { AuthorRepository } from "@app/repositories/author-repository";
 import {
     BadRequestError,
     NotFoundError,
     Unauthorized,
-} from "../../../../../shared/errors/app-error";
-import { inject, injectable } from "tsyringe";
-import { compare, hash } from "bcryptjs";
-import { Password } from "../../entities/validation";
+} from "@shared/errors/app-error";
 
 interface ResetPasswordUseCaseProps {
     id: string;

@@ -1,14 +1,11 @@
-import { AuthorRepository } from "../../../../repositories/author-repository";
-import {
-    BadRequestError,
-    NotFoundError,
-} from "../../../../../shared/errors/app-error";
 import { inject, injectable } from "tsyringe";
 import { Email } from "../../entities/validation";
 import { sign } from "jsonwebtoken";
-import { enviromentVariables } from "../../../../constraints/enviroment-variables";
-import { RedisRepository } from "../../../../repositories/redis-repository";
 import { compare } from "bcryptjs";
+import { AuthorRepository } from "@app/repositories/author-repository";
+import { RedisRepository } from "@app/repositories/redis-repository";
+import { BadRequestError, NotFoundError } from "@shared/errors/app-error";
+import { enviromentVariables } from "@app/constraints/enviroment-variables";
 
 interface AuthAuthorUseCaseProps {
     email: string;
