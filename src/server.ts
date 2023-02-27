@@ -5,6 +5,7 @@ import "express-async-errors";
 import { route } from "./shared/infra/http/routes";
 import "./shared/container/index";
 import path from "path";
+import { enviromentVariables } from "@app/constraints/enviroment-variables";
 
 const app = express();
 
@@ -36,4 +37,4 @@ app.use(
     }
 );
 
-app.listen(3000, () => console.log("im running"));
+app.listen(enviromentVariables.aws, () => console.log("im running"));
