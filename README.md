@@ -59,6 +59,14 @@ pictures: file
 
 /listByID
 
-You are able to list all users from entire app and from your Gallery. It must be fixed later, altough any rlly sensitive data is leaking with data.
+You are able to list all users from entire app and from your Gallery. It must be fixed later, altough any rlly sensitive data is leaking with that.
 
 ![image](https://user-images.githubusercontent.com/68877260/221591159-0218316f-7b08-408b-9bcb-e9c06bf80b99.png)
+
+# Improvements and extensions
+
+* We must implement a rate limiter and debounce to prevent alot of requests
+* Tests E2E would be really good
+* Find a better way to instance Redis
+* Observation -> sentry or any other tool
+* Create a admin ROLE 
