@@ -39,4 +39,4 @@ app.use(
     }
 );
 
-app.listen(enviromentVariables.aws, () => console.log("im running"));
+app.listen(enviromentVariables.port, () => console.log("im running"));

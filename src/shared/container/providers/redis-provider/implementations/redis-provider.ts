@@ -9,7 +9,6 @@ export class RedisProvider implements RedisRepository {
 
     constructor() {
         this.redisClient = createClient();
-        this.connect();
     }
 
     async disconnect(): Promise<void> {
