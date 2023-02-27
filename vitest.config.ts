@@ -5,12 +5,6 @@ export default defineConfig({
     resolve: {
         alias: {
             "@app": path.resolve(__dirname, "./src/application"),
-            "@modules": path.resolve(__dirname, "./src/application/modules"),
-            "@constraints": path.resolve(
-                __dirname,
-                "./src/application/constraints"
-            ),
-            "@helpers": path.resolve(__dirname, "./src/application/helpers"),
             "@shared": path.resolve(__dirname, "./src/shared"),
         },
     },

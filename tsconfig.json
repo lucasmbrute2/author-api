@@ -4,18 +4,15 @@
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "module": "commonjs",
-        "baseUrl": "./src",
+        "baseUrl": ".",
         "resolveJsonModule": true,
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "skipLibCheck": true,
         "outDir": "./dist",
         "paths": {
-            "@app/*": ["application/*"],
-            "@modules/*": ["application/modules/*"],
-            "@constraints/*": ["application/constraints/*"],
-            "@helpers/*": ["application/helpers/*"],
-            "@shared/*": ["shared/*"]
+            "@app/*": ["./src/application/*"],
+            "@shared/*": ["./src/shared/*"]
         }
     }
 }
