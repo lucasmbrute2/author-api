@@ -9,6 +9,7 @@ import { enviromentVariables } from "@app/constraints/enviroment-variables";
 import cors from "cors";
 
 const app = express();
+app.use(cors());
 
 app.use(express.json());
 app.use(route);
@@ -17,7 +18,6 @@ app.use(
     express.static(path.resolve(__dirname, "..", "tmp"))
 );
 
-app.use(cors());
 app.use(
     (
         error: Error,
