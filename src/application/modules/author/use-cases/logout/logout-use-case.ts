@@ -15,10 +15,8 @@ export class LogoutUseCase {
     async execute(id: string): Promise<void> {
         const isAuthorValid = await this.authorRepository.findByID(id);
         if (!isAuthorValid) throw new NotFoundError("Author not found.");
-
-        await this.redisClient.disconnect();
         await this.redisClient.connect();
-
         await this.redisClient.delete(id);
+        await this.redisClient.disconnect();
     }
 }

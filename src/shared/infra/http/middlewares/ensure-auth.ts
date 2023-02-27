@@ -11,7 +11,6 @@ export class Authorization {
         const redisClient = container.resolve(RedisProvider);
 
         try {
-            await redisClient.disconnect();
             const [_, token] = authHeader.split(" ");
 
             const { sub: user_id } = verify(
@@ -20,7 +19,6 @@ export class Authorization {
             );
 
             await redisClient.connect();
-
             const isTokenAvailable = await redisClient.getValue(
                 user_id as string
             );

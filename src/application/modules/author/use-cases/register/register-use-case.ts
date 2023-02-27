@@ -34,9 +34,6 @@ export class RegisterAuthorUseCase {
     async execute(
         request: RegisterAuthorRepositoryRequest
     ): Promise<RegisterAuthorRepositoryResponse> {
-        await this.redisClient.disconnect(); //refac
-        await this.redisClient.connect();
-
         const { email, name, password, confirmPassword } = request;
 
         if (password !== confirmPassword)
@@ -70,11 +67,13 @@ export class RegisterAuthorUseCase {
 
         await this.authorRepository.create(author);
 
+        await this.redisClient.connect();
         await this.redisClient.setValue(
             author.id,
             token,
             TOKEN_EXPIRE_IN_HOURS
         );
+        await this.redisClient.disconnect(); //refac
 
         return {
             author,

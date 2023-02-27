@@ -28,7 +28,7 @@
     },
     "scripts": {
         "start:dev": "ts-node-dev -r tsconfig-paths/register --transpile-only --respawn  src/server.ts",
-        "start": "node ./dist/server.js",
+        "start": "node ./dist/server.js npx prisma migrate deploy",
         "test": "vitest",
         "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored"
     },
