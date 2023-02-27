@@ -1,6 +1,6 @@
 # Welcome to Author API
 
-An API that supports an auth application, you can handle Author (users), login up, login out, editting profile, etc. The most important part is upload of files, we are using S3 buckets as storage, you can list, create and delete them ( we are filtering with a "page" parameter ). Btw this is just 4fun project for a interview.
+An API that supports an auth application, you can handle Author (users), login up, login out, editting profile, etc. The most important part is upload of files, we are using S3 buckets to storage it, you can list, create and delete them ( we are filtering with a "page" parameter ). Btw this is just 4fun project for a interview.
 
 ## [Deployed on Railway](https://interview-production-e06a.up.railway.app/)
 
