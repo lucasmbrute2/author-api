@@ -22,11 +22,6 @@ export class Author {
         this._galleryId();
     }
 
-    _id() {
-        if (this.props.id) return;
-        this.props.id = randomUUID();
-    }
-
     get id(): string {
         return this.props.id;
     }
@@ -73,9 +68,8 @@ export class Author {
         return this.props.bio;
     }
 
-    _createdAt() {
+    private _createdAt() {
         if (this.props.createdAt) return;
-
         this.props.createdAt = new Date();
     }
 
@@ -93,7 +87,6 @@ export class Author {
 
     _galleryId() {
         if (this.props.galleryId) return;
-
         this.props.galleryId = randomUUID();
     }
 

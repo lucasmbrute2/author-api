@@ -17,11 +17,6 @@ export class Picture {
         this._createdAt();
     }
 
-    _id(): string {
-        if (this.props.id) return;
-        return (this.props.id = randomUUID());
-    }
-
     get id(): string {
         return this.props.id;
     }
@@ -54,7 +49,7 @@ export class Picture {
         return this.props.createdAt;
     }
 
-    _createdAt() {
+    private _createdAt() {
         if (this.props.createdAt) return;
         this.props.createdAt = new Date();
     }
