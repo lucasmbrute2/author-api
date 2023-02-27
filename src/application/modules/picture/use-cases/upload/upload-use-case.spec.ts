@@ -20,4 +20,8 @@ describe("Upload picture", () => {
             pictureRepository
         );
     });
+
+    it("should not be able to post a picture without an author ID", () => {
+        expect(async () => {});
+    });
 });

@@ -2,6 +2,7 @@
     "name": "author-api",
     "version": "1.0.0",
     "main": "index.js",
+    "type": "module",
     "author": "Lucas Victor de Souza Dantas <68877260+lucasmbrute2@users.noreply.github.com>",
     "license": "MIT",
     "devDependencies": {
@@ -11,7 +12,6 @@
         "@types/jsonwebtoken": "^9.0.1",
         "@types/mime": "^3.0.1",
         "@types/multer": "^1.4.7",
-        "@types/node": "^18.14.1",
         "prisma": "^4.10.1",
         "ts-node-dev": "^2.0.0",
         "tsconfig-paths": "^3.14.2",
@@ -20,6 +20,7 @@
     },
     "scripts": {
         "start:dev": "ts-node-dev --transpile-only --respawn -r tsconfig-paths/register src/server.ts",
+        "start": "node build/server.js",
         "test": "vitest",
         "build": "tsc"
     },
@@ -38,6 +39,7 @@
         "redis": "^4.6.4",
         "redis-mock": "^0.56.3",
         "reflect-metadata": "^0.1.13",
+        "ts-node": "^10.9.1",
         "tsyringe": "^4.7.0"
     }
 }
