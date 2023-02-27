@@ -1,6 +1,7 @@
 import { Picture } from "@app/modules/picture/entities/picture";
 import { PictureRepository } from "@app/repositories/picture-repository";
 import { PrismaClient } from "@prisma/client";
+import { randomUUID } from "node:crypto";
 import { inject, injectable } from "tsyringe";
 import { PrismaMapper } from "../mapper/prisma-picture-mapper";
 
@@ -77,5 +78,16 @@ export class PrismaRepositoryPicture implements PictureRepository {
         });
 
         return pictures.map(PrismaMapper.toDomain);
+    }
+
+    async softDelete(pictureName: string): Promise<void> {
+        await this.prisma.picture.update({
+            where: {
+                alias_key: pictureName,
+            },
+            data: {
+                deleted_at: randomUUID(),
+            },
+        });
     }
 }
