@@ -6,6 +6,7 @@ import multer from "multer";
 import { Authorization } from "../middlewares/ensure-auth";
 import { DeleteController } from "../../../../application/modules/picture/use-cases/delete/delete-controller";
 import { ListByGalleryIdController } from "../../../../application/modules/picture/use-cases/list-all/list-by-gallery-id-controller";
+import { SoftDeleteController } from "../../../../application/modules/picture/use-cases/soft-delete/soft-delete-controller";
 
 const pictureRoutes = Router();
 const upload = multer(multerConfigs);
@@ -14,6 +15,7 @@ const authorization = new Authorization();
 const uploadController = new UploadController();
 const deleteController = new DeleteController();
 const listByGalleryIdController = new ListByGalleryIdController();
+const softDeleteController = new SoftDeleteController();
 
 pictureRoutes.post(
     "/upload",
@@ -32,6 +34,12 @@ pictureRoutes.get(
     "/listByID",
     authorization.ensureAuth,
     listByGalleryIdController.handle
+);
+
+pictureRoutes.put(
+    "/exclude/:filename",
+    authorization.ensureAuth,
+    softDeleteController.handle
 );
 
 export { pictureRoutes };
