@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+    postgres:
+        container_name: db
+        image: postgres:10.5
+        environment:
+            - POSTGRES_DB=${DB_NAME}
+            - POSTGRES_USER=${DB_USERNAME}
+            - POSTGRES_PASSWORD=${DB_PASSWORD}
+        ports:
+            - "5432:5432"
+        volumes:
+            - .:/usr/src/app
+    redis:
+        image: redis:6.2-alpine
+        ports:
+            - "6379:6379"
+        environment:
+            - REDIS_PASSWORD={REDIS_PASSWORD}
+            - REDIS_HOST={REDIS_HOST}
+            - REDIS_PORT={REDIS_PORT}

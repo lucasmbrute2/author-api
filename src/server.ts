@@ -6,6 +6,7 @@ import { route } from "./shared/infra/http/routes";
 import "./shared/container/index";
 import path from "path";
 import { enviromentVariables } from "@app/constraints/enviroment-variables";
+import cors from "cors";
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(
     express.static(path.resolve(__dirname, "..", "tmp"))
 );
 
+app.use(cors());
 app.use(
     (
         error: Error,
