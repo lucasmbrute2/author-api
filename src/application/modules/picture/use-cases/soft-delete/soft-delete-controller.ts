@@ -10,6 +10,8 @@ export class SoftDeleteController {
 
         await softDeleteUseCase.execute(filename, id);
 
-        return res.status(200).send();
+        return res.status(200).json({
+            status: "success",
+        });
     }
 }

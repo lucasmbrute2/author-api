@@ -19,6 +19,7 @@ export class ListByGalleryIdController {
         const formatPictes = pictures.map(PictureViewModel.toHTTP);
         return res.status(200).json({
             pictures: formatPictes,
+            status: "success",
         });
     }
 }

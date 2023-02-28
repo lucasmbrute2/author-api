@@ -8,6 +8,8 @@ export class LogoutController {
         const logoutUseCase = container.resolve(LogoutUseCase);
 
         await logoutUseCase.execute(id);
-        return res.status(200).send();
+        return res.status(200).json({
+            status: "success",
+        });
     }
 }

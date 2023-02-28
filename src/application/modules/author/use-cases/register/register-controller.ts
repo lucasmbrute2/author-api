@@ -29,6 +29,7 @@ export class RegisterAuthorController {
         return res.status(201).json({
             author: AuthorViewlModel.toHTTP(author),
             token,
+            status: "success",
         });
     }
 }

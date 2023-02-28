@@ -19,6 +19,8 @@ export class UploadController {
         const picture = await uploadPictureUseCase.execute(file, id);
 
         const pictureToClient = PictureViewModel.toHTTP(picture);
-        return res.status(201).json(pictureToClient);
+        return res
+            .status(201)
+            .json({ picture: pictureToClient, status: "success" });
     }
 }

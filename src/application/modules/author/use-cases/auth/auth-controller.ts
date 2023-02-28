@@ -25,6 +25,7 @@ export class AuthAuthorController {
 
         return res.status(200).json({
             token,
+            status: "success",
         });
     }
 }

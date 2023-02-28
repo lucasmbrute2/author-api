@@ -22,6 +22,9 @@ export class EditProfileController {
             id
         );
 
-        return res.status(201).json(AuthorViewlModel.toHTTP(author));
+        return res.status(201).json({
+            autor: AuthorViewlModel.toHTTP(author),
+            status: "success",
+        });
     }
 }
