@@ -38,7 +38,7 @@ pictureRoutes.get(
     listByGalleryIdController.handle
 );
 
-pictureRoutes.put(
+pictureRoutes.get(
     "/exclude/:filename",
     authorization.ensureAuth,
     softDeleteController.handle
