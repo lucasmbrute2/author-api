@@ -5,6 +5,7 @@ import { NotFoundError } from "@shared/errors/app-error";
 import "reflect-metadata";
 import { inject, injectable } from "tsyringe";
 import { makePicture } from "../../factory/make-picture";
+import { enviromentVariables } from "@app/constraints/enviroment-variables";
 
 @injectable()
 export class UploadPictureUseCase {
@@ -27,6 +28,10 @@ export class UploadPictureUseCase {
         await this.pictureRepository.save(picture);
 
         if (!author) throw new NotFoundError("Author not found");
+        picture[
+            "htmlUrl"
+        ] = `https://${enviromentVariables.aws.bucketName}.s3.${enviromentVariables.aws.region}.amazonaws.com/test/${picture.aliasKey}`;
+
         return picture;
     }
 }
