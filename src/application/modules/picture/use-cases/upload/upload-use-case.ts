@@ -25,13 +25,10 @@ export class UploadPictureUseCase {
 
         const picture = makePicture(file, author.galleryId);
         await this.storageProvider.save(picture);
-        await this.pictureRepository.save(picture);
-
-        if (!author) throw new NotFoundError("Author not found");
         picture[
             "htmlUrl"
         ] = `https://${enviromentVariables.aws.bucketName}.s3.${enviromentVariables.aws.region}.amazonaws.com/test/${picture.aliasKey}`;
-
+        await this.pictureRepository.save(picture);
         return picture;
     }
 }
