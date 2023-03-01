@@ -18,7 +18,6 @@ export class Authorization {
                 enviromentVariables.jwtTokenHash
             );
 
-            await redisClient.connect();
             const isTokenAvailable = await redisClient.getValue(
                 user_id as string
             );

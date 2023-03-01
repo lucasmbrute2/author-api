@@ -52,15 +52,11 @@ export class AuthAuthorUseCase {
         const SECONDS = 60;
         const TOKEN_EXPIRE_IN_HOURS = SECONDS * SECONDS * 1;
 
-        await this.redisClient.connect();
-
         await this.redisClient.setValue(
             isAuthorExistent.id,
             token,
             TOKEN_EXPIRE_IN_HOURS
         );
-
-        await this.redisClient.disconnect(); //refac
 
         return {
             token,

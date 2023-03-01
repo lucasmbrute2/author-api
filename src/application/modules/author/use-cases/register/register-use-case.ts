@@ -67,13 +67,9 @@ export class RegisterAuthorUseCase {
 
         await this.authorRepository.create(author);
 
-        await this.redisClient.connect();
-        await this.redisClient.setValue(
-            author.id,
-            token,
-            TOKEN_EXPIRE_IN_HOURS
-        );
-        await this.redisClient.disconnect(); //refac
+        this.redisClient
+            .setValue(author.id, token, TOKEN_EXPIRE_IN_HOURS)
+            .then(console.log);
 
         return {
             author,

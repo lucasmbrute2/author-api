@@ -3,14 +3,19 @@ import { createClient } from "redis";
 import { RedisClientType } from "@redis/client";
 import { injectable } from "tsyringe";
 import { enviromentVariables } from "@app/constraints/enviroment-variables";
+import Redis from "ioredis";
 
 @injectable()
 export class RedisProvider implements RedisRepository {
-    public redisClient: RedisClientType;
+    public redisClient: Redis;
 
     constructor() {
-        this.redisClient = createClient({
-            url: enviromentVariables.redis.url,
+        const { host, password, port, username } = enviromentVariables.redis;
+        this.redisClient = new Redis({
+            port: +port,
+            host,
+            username,
+            password,
         });
     }
 
@@ -23,10 +28,7 @@ export class RedisProvider implements RedisRepository {
     }
 
     async setValue(key: string, value: string, expire: number): Promise<void> {
-        await this.redisClient.set(key, value, {
-            EX: expire,
-            NX: true,
-        });
+        await this.redisClient.set(key, value, "EX", expire);
     }
 
     async getValue(key: string): Promise<string> {
