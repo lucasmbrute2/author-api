@@ -13,5 +13,9 @@ export const enviromentVariables = {
     },
     redis: {
         url: process.env.REDIS_URL,
+        port: process.env.REDISPORT,
+        host: process.env.REDISHOST,
+        username: process.env.REDISUSER,
+        password: process.env.REDISPASSWORD,
     },
 };

@@ -5,9 +5,9 @@ services:
         container_name: db
         image: postgres:10.5
         environment:
-            - POSTGRES_DB=${DB_NAME}
-            - POSTGRES_USER=${DB_USERNAME}
-            - POSTGRES_PASSWORD=${DB_PASSWORD}
+            - POSTGRES_DB=${PGDATABASE}
+            - POSTGRES_USER=${PGUSER}
+            - POSTGRES_PASSWORD=${PGPASSWORD}
         ports:
             - "5432:5432"
         volumes:
@@ -17,6 +17,6 @@ services:
         ports:
             - "6379:6379"
         environment:
-            - REDIS_PASSWORD={REDIS_PASSWORD}
-            - REDIS_HOST={REDIS_HOST}
-            - REDIS_PORT={REDIS_PORT}
+            - REDIS_PASSWORD={REDISPASSWORD}
+            - REDIS_HOST={REDISHOST}
+            - REDIS_PORT={REDISPORT}
