@@ -45,12 +45,12 @@ export class AuthAuthorUseCase {
         if (!isPasswordCorrect)
             throw new BadRequestError("Email or password incorrect");
 
-        const token = sign({}, enviromentVariables.jwtTokenHash, {
-            subject: isAuthorExistent.id,
-        });
-
         const SECONDS = 60;
         const TOKEN_EXPIRE_IN_HOURS = SECONDS * SECONDS * 168;
+        const token = sign({}, enviromentVariables.jwtTokenHash, {
+            subject: isAuthorExistent.id,
+            expiresIn: TOKEN_EXPIRE_IN_HOURS,
+        });
 
         await this.redisClient.setValue(
             isAuthorExistent.id,
