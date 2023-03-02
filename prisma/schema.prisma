@@ -8,25 +8,22 @@ datasource db {
 }
 
 model Author {
-  id              String    @id
+  id              String        @id
   name            String
   password        String
-  created_at      DateTime  @db.Timestamp(6)
-  deleted_at      DateTime? @db.Timestamp(6)
-  bio             String?   @db.VarChar
+  created_at      DateTime      @db.Timestamp(6)
+  deleted_at      DateTime?     @db.Timestamp(6)
+  bio             String?       @db.VarChar
   profile_picture String?
-  username        String    @unique
-
-  galleryId       String    @unique
-  gallery         Gallery   @relation(fields: [galleryId], references: [id])
-
-  refresh_token  RefreshToken?
+  username        String        @unique
+  galleryId       String        @unique
+  gallery         Gallery       @relation(fields: [galleryId], references: [id])
+  refresh_token   RefreshToken?
 }
 
 model Gallery {
-  id      String  @id
+  id       String    @id
   api_link String?
- 
   author   Author?
   photo    Picture[]
 }
@@ -38,7 +35,6 @@ model Picture {
   alias_key  String    @unique
   created_at DateTime  @db.Timestamp(6)
   deleted_at DateTime? @db.Timestamp(6)
-
   galleryId  String
   gallery    Gallery   @relation(fields: [galleryId], references: [id], onDelete: Cascade)
 
@@ -46,12 +42,11 @@ model Picture {
 }
 
 model RefreshToken {
-  id String @id
+  id        String @id
   expire_in Int
-
-  user Author @relation(fields: [userId], references: [id])
-  userId String @unique
-  token String
+  token     String
+  user      Author @relation(fields: [userId], references: [id])
+  userId    String @unique
 
   @@index([userId])
 }
