@@ -17,9 +17,10 @@ model Author {
   profile_picture String?
   username        String    @unique
 
-
   galleryId       String    @unique
   gallery         Gallery   @relation(fields: [galleryId], references: [id])
+
+  refresh_token  RefreshToken?
 }
 
 model Gallery {
@@ -42,4 +43,15 @@ model Picture {
   gallery    Gallery   @relation(fields: [galleryId], references: [id], onDelete: Cascade)
 
   @@index([galleryId])
+}
+
+model RefreshToken {
+  id String @id
+  expire_in Int
+
+  user Author @relation(fields: [userId], references: [id])
+  userId String @unique
+  token String
+
+  @@index([userId])
 }
