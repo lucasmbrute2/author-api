@@ -5,18 +5,22 @@ import { InMemoryRedisProvider } from "@shared/container/providers/redis-provide
 import { InMemoryRepository } from "../../repository/in-memory-author-repository";
 import { makeAuthor } from "../../factory/makeAuthor";
 import { BadRequestError } from "@shared/errors/app-error";
+import { InMemoryRefreshTokenRepository } from "@app/modules/refresh-token/repository/in-memory-refresh-token";
 
 let authorRepository: InMemoryRepository;
 let registerAuthorUseCase: RegisterAuthorUseCase;
 let inMemoryRedisProvider: InMemoryRedisProvider;
+let inMemoryRefreshTokenRepository: InMemoryRefreshTokenRepository;
 
 describe("Register Author", () => {
     beforeEach(() => {
         inMemoryRedisProvider = new InMemoryRedisProvider();
         authorRepository = new InMemoryRepository();
+        inMemoryRefreshTokenRepository = new InMemoryRefreshTokenRepository();
         registerAuthorUseCase = new RegisterAuthorUseCase(
             authorRepository,
-            inMemoryRedisProvider
+            inMemoryRedisProvider,
+            inMemoryRefreshTokenRepository
         );
     });
 
