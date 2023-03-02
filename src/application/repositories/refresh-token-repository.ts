@@ -2,5 +2,6 @@ import { RefreshToken } from "@app/modules/refresh-token/entities/refresh-token"
 
 export interface RefreshTokenRepository {
     save(refreshToken: RefreshToken): Promise<RefreshToken>;
-    delete(refreshToken: string, userId: string): Promise<void>;
+    delete(userId: string): Promise<void>;
+    findByAuthorId(authorId: string): Promise<RefreshToken | null>;
 }

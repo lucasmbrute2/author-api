@@ -13,7 +13,6 @@ export class PrismaRefreshTokenRepository implements RefreshTokenRepository {
     ) {
         this.prisma = prisma;
     }
-
     async save(refreshToken: RefreshToken): Promise<RefreshToken> {
         const refreshTokenMapped = PrismaMapper.toPrisma(refreshToken);
 
@@ -30,5 +29,15 @@ export class PrismaRefreshTokenRepository implements RefreshTokenRepository {
                 id: refreshTokenID,
             },
         });
+    }
+
+    async findByAuthorId(authorId: string): Promise<RefreshToken> {
+        const refreshToken = await this.prisma.refreshToken.findUnique({
+            where: {
+                userId: authorId,
+            },
+        });
+
+        return PrismaMapper.toDomain(refreshToken);
     }
 }

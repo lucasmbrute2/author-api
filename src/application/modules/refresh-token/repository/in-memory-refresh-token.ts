@@ -9,10 +9,15 @@ export class InMemoryRefreshTokenRepository implements RefreshTokenRepository {
         return refreshToken;
     }
 
-    async delete(token: string, userId: string): Promise<void> {
+    async delete(userId: string): Promise<void> {
         this.refreshToken = this.refreshToken.filter(
-            (refreshToken) =>
-                refreshToken.userId !== userId && refreshToken.token !== token
+            (refreshToken) => refreshToken.userId !== userId
+        );
+    }
+
+    async findByAuthorId(authorId: string): Promise<RefreshToken> {
+        return this.refreshToken.find(
+            (refreshToken) => refreshToken.userId === authorId
         );
     }
 }
