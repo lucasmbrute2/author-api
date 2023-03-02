@@ -22,7 +22,7 @@ authorRouter.patch(
     authEditProfileController.handle
 );
 
-authorRouter.get("/logout/:id", logoutController.handle);
+authorRouter.get("/logout", authorization.ensureAuth, logoutController.handle);
 authorRouter.put(
     "/reset",
     authorization.ensureAuth,
