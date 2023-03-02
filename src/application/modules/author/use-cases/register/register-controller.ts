@@ -19,16 +19,18 @@ export class RegisterAuthorController {
 
         const { confirmPassword, email, name, password } = req.body;
 
-        const { author, token } = await registerAuthorUseCase.execute({
-            confirmPassword,
-            email,
-            name,
-            password,
-        });
+        const { author, token, refreshToken } =
+            await registerAuthorUseCase.execute({
+                confirmPassword,
+                email,
+                name,
+                password,
+            });
 
         return res.status(201).json({
             author: AuthorViewlModel.toHTTP(author),
             token,
+            refreshToken,
             status: "success",
         });
     }
