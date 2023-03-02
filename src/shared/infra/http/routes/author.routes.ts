@@ -3,6 +3,7 @@ import { EditProfileController } from "@app/modules/author/use-cases/edit-profil
 import { LogoutController } from "@app/modules/author/use-cases/logout/logout-controller";
 import { RegisterAuthorController } from "@app/modules/author/use-cases/register/register-controller";
 import { ResetPasswordController } from "@app/modules/author/use-cases/reset-password/reset-password-controller";
+import { RefreshTokenController } from "@app/modules/refresh-token/use-cases/refresh-token-controller";
 import { Router } from "express";
 import { Authorization } from "../middlewares/ensure-auth";
 const authorRouter = Router();
@@ -13,6 +14,7 @@ const authEditProfileController = new EditProfileController();
 const authorization = new Authorization();
 const logoutController = new LogoutController();
 const resetPasswordController = new ResetPasswordController();
+const refreshTokenController = new RefreshTokenController();
 
 authorRouter.post("/register", registerAuthorController.handle);
 authorRouter.post("/auth", authAuthorController.handle);
@@ -28,5 +30,7 @@ authorRouter.put(
     authorization.ensureAuth,
     resetPasswordController.handle
 );
+
+authorRouter.post("/refresh", refreshTokenController.handle);
 
 export { authorRouter };
