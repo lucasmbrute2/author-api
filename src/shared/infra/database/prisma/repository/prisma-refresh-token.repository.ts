@@ -1,13 +1,14 @@
 import { RefreshToken } from "@app/modules/refresh-token/entities/refresh-token";
 import { RefreshTokenRepository } from "@app/repositories/refresh-token-repository";
 import { PrismaClient } from "@prisma/client";
-import { inject } from "tsyringe";
+import { inject, injectable } from "tsyringe";
 import { PrismaMapper } from "../mapper/prisma-refresh-token-mapper";
 
+@injectable()
 export class PrismaRefreshTokenRepository implements RefreshTokenRepository {
     private prisma: PrismaClient;
     constructor(
-        @inject("PrismaClient")
+        @inject(PrismaClient)
         prisma: PrismaClient
     ) {
         this.prisma = prisma;
@@ -15,24 +16,19 @@ export class PrismaRefreshTokenRepository implements RefreshTokenRepository {
 
     async save(refreshToken: RefreshToken): Promise<RefreshToken> {
         const refreshTokenMapped = PrismaMapper.toPrisma(refreshToken);
-        const { userId, id, expire_in, token } = refreshTokenMapped;
 
-        const rawRefreshToken = await this.prisma.refreshToken.upsert({
-            where: {
-                id,
-                userId,
-            },
-            update: {
-                expire_in,
-                token,
-            },
-            create: refreshTokenMapped,
+        const rawRefreshToken = await this.prisma.refreshToken.create({
+            data: refreshTokenMapped,
         });
 
         return PrismaMapper.toDomain(rawRefreshToken);
     }
 
-    async delete(refreshToken: string, userId: string): Promise<void> {
-        throw new Error("Method not implemented.");
+    async delete(refreshTokenID: string): Promise<void> {
+        await this.prisma.refreshToken.delete({
+            where: {
+                id: refreshTokenID,
+            },
+        });
     }
 }
