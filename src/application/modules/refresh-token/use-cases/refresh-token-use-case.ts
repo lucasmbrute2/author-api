@@ -41,7 +41,7 @@ export class RefreshTokenUseCase {
         const REFRESH_TOKEN_EXPIRE_IN_HOURS = SECONDS * SECONDS * 24;
         const refreshTokenSigned = sign({}, enviromentVariables.refreshToken, {
             subject: authorId,
-            expiresIn: REFRESH_TOKEN_EXPIRE_IN_HOURS,
+            expiresIn: `${REFRESH_TOKEN_EXPIRE_IN_HOURS}h`,
         });
 
         const refreshTokenfromFactory = makeRefreshToken(authorId, {
@@ -57,7 +57,7 @@ export class RefreshTokenUseCase {
 
         const TOKEN_EXPIRE_IN_HOURS = SECONDS * SECONDS * 1;
         const accessToken = sign({}, enviromentVariables.jwtTokenHash, {
-            expiresIn: TOKEN_EXPIRE_IN_HOURS,
+            expiresIn: `${TOKEN_EXPIRE_IN_HOURS}h`,
             subject: authorId,
         });
 

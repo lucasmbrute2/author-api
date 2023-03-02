@@ -65,14 +65,14 @@ export class RegisterAuthorUseCase {
         const SECONDS = 60;
         const TOKEN_EXPIRE_IN_HOURS = SECONDS * SECONDS * 1;
         const token = sign({}, enviromentVariables.jwtTokenHash, {
-            expiresIn: TOKEN_EXPIRE_IN_HOURS,
+            expiresIn: `${TOKEN_EXPIRE_IN_HOURS}h`,
             subject: authorId,
         });
 
         const REFRESH_TOKEN_EXPIRE_IN_HOURS = SECONDS * SECONDS * 24;
         const refreshToken = sign({}, enviromentVariables.refreshToken, {
             subject: authorId,
-            expiresIn: REFRESH_TOKEN_EXPIRE_IN_HOURS,
+            expiresIn: `${REFRESH_TOKEN_EXPIRE_IN_HOURS}h`,
         });
 
         const refreshTokenfromFactory = makeRefreshToken(authorId, {

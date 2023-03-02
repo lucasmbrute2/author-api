@@ -49,7 +49,7 @@ export class AuthAuthorUseCase {
         const TOKEN_EXPIRE_IN_HOURS = SECONDS * SECONDS * 1;
         const token = sign({}, enviromentVariables.jwtTokenHash, {
             subject: isAuthorExistent.id,
-            expiresIn: TOKEN_EXPIRE_IN_HOURS,
+            expiresIn: `${TOKEN_EXPIRE_IN_HOURS}h`,
         });
 
         await this.redisClient.setValue(
