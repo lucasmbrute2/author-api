@@ -68,4 +68,4 @@ You are able to list all users from entire app and from your Gallery. It must be
 * We must implement a rate limiter and debounce to prevent alot of requests
 * Tests E2E would be really good
 * Observation -> sentry or any other tool
-* Create a admin ROLE 
+* Create an admin ROLE 
