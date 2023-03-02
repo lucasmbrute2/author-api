@@ -46,7 +46,7 @@ export class AuthAuthorUseCase {
             throw new BadRequestError("Email or password incorrect");
 
         const SECONDS = 60;
-        const TOKEN_EXPIRE_IN_HOURS = SECONDS * SECONDS * 168;
+        const TOKEN_EXPIRE_IN_HOURS = SECONDS * SECONDS * 1;
         const token = sign({}, enviromentVariables.jwtTokenHash, {
             subject: isAuthorExistent.id,
             expiresIn: TOKEN_EXPIRE_IN_HOURS,
