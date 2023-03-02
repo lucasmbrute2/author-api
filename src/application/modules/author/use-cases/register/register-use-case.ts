@@ -60,20 +60,22 @@ export class RegisterAuthorUseCase {
             password: new Password(password),
         });
 
+        const { id: authorId } = author;
+
         const SECONDS = 60;
         const TOKEN_EXPIRE_IN_HOURS = SECONDS * SECONDS * 1;
         const token = sign({}, enviromentVariables.jwtTokenHash, {
             expiresIn: TOKEN_EXPIRE_IN_HOURS,
-            subject: author.id,
+            subject: authorId,
         });
 
         const REFRESH_TOKEN_EXPIRE_IN_HOURS = SECONDS * SECONDS * 24;
         const refreshToken = sign({}, enviromentVariables.refreshToken, {
-            subject: author.id,
+            subject: authorId,
             expiresIn: REFRESH_TOKEN_EXPIRE_IN_HOURS,
         });
 
-        const refreshTokenfromFactory = makeRefreshToken(author.id, {
+        const refreshTokenfromFactory = makeRefreshToken(authorId, {
             expireIn: dayjs()
                 .add(REFRESH_TOKEN_EXPIRE_IN_HOURS, "hours")
                 .unix(),
@@ -88,9 +90,7 @@ export class RegisterAuthorUseCase {
             refreshTokenfromFactory
         );
 
-        this.redisClient
-            .setValue(author.id, token, TOKEN_EXPIRE_IN_HOURS)
-            .then(console.log);
+        this.redisClient.setValue(authorId, token, TOKEN_EXPIRE_IN_HOURS);
 
         return {
             author,

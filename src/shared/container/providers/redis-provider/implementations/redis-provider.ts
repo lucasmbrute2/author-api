@@ -1,6 +1,4 @@
 import { RedisRepository } from "@app/repositories/redis-repository";
-import { createClient } from "redis";
-import { RedisClientType } from "@redis/client";
 import { injectable } from "tsyringe";
 import { enviromentVariables } from "@app/constraints/enviroment-variables";
 import Redis from "ioredis";

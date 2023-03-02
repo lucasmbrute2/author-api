@@ -23,10 +23,10 @@ export class PrismaRefreshTokenRepository implements RefreshTokenRepository {
         return PrismaMapper.toDomain(rawRefreshToken);
     }
 
-    async delete(refreshTokenID: string): Promise<void> {
+    async delete(refreshTokenId: string): Promise<void> {
         await this.prisma.refreshToken.delete({
             where: {
-                id: refreshTokenID,
+                id: refreshTokenId,
             },
         });
     }
