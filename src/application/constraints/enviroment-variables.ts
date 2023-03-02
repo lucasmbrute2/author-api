@@ -3,6 +3,7 @@ dotenv.config();
 
 export const enviromentVariables = {
     jwtTokenHash: process.env.TOKEN_MD5_HASH,
+    refreshToken: process.env.REFRESH_TOKEN_SECRET,
     storage: process.env.STORAGE,
     port: process.env.PORT,
     aws: {
