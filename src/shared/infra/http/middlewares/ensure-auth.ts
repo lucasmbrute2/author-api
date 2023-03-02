@@ -1,6 +1,6 @@
 import { enviromentVariables } from "@app/constraints/enviroment-variables";
 import { RedisProvider } from "@shared/container/providers/redis-provider/implementations/redis-provider";
-import { Unauthorized } from "@shared/errors/app-error";
+import { AppError, Unauthorized } from "@shared/errors/app-error";
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 import { container } from "tsyringe";
@@ -26,10 +26,10 @@ export class Authorization {
                 id: user_id as string,
             };
             if (!isTokenAvailable) {
-                throw new Unauthorized("Missing token");
+                throw new AppError("Missing token", 403);
             }
         } catch (error) {
-            throw new Unauthorized("Missing token");
+            throw new AppError("Missing token", 403);
         }
 
         return next();
