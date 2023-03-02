@@ -50,7 +50,7 @@ export class AuthAuthorUseCase {
         });
 
         const SECONDS = 60;
-        const TOKEN_EXPIRE_IN_HOURS = SECONDS * SECONDS * 1;
+        const TOKEN_EXPIRE_IN_HOURS = SECONDS * SECONDS * 168;
 
         await this.redisClient.setValue(
             isAuthorExistent.id,
