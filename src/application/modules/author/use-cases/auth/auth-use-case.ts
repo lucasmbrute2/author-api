@@ -10,7 +10,6 @@ import { enviromentVariables } from "@app/constraints/enviroment-variables";
 interface AuthAuthorUseCaseProps {
     email: string;
     password: string;
-    confirmPassword: string;
 }
 
 interface AuthAuthorUseCaseResponse {
@@ -29,9 +28,6 @@ export class AuthAuthorUseCase {
     async execute(
         req: AuthAuthorUseCaseProps
     ): Promise<AuthAuthorUseCaseResponse> {
-        if (req.password !== req.confirmPassword)
-            throw new BadRequestError("Password do not match");
-
         const email = new Email(req.email);
         const isAuthorExistent = await this.authorRepository.findByEmail(email);
 

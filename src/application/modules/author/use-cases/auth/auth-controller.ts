@@ -5,7 +5,6 @@ import { AuthAuthorUseCase } from "./auth-use-case";
 interface AuthAuthorControllerProps {
     email: string;
     password: string;
-    confirmPassword: string;
 }
 
 export class AuthAuthorController {
@@ -13,12 +12,11 @@ export class AuthAuthorController {
         req: Request<nonValuable, nonValuable, AuthAuthorControllerProps>,
         res: Response
     ): Promise<Response> {
-        const { confirmPassword, email, password } = req.body;
+        const { email, password } = req.body;
 
         const authAuthorUseCase = container.resolve(AuthAuthorUseCase);
 
         const { token } = await authAuthorUseCase.execute({
-            confirmPassword,
             email,
             password,
         });
