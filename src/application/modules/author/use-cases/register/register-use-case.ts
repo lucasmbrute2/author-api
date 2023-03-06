@@ -11,7 +11,7 @@ import { BadRequestError } from "@shared/errors/app-error";
 import { enviromentVariables } from "@app/constraints/enviroment-variables";
 import { RefreshTokenRepository } from "@app/repositories/refresh-token-repository";
 import { makeRefreshToken } from "@app/modules/refresh-token/factory/make-refresh-token";
-import dayjs from "dayjs";
+import { DateRepository } from "@app/repositories/date-repository";
 
 export interface RegisterAuthorRepositoryRequest {
     name: string;
@@ -34,7 +34,9 @@ export class RegisterAuthorUseCase {
         @inject("RedisRepository")
         private redisClient: RedisRepository,
         @inject("RefreshTokenRepository")
-        private refreshTokenRepository: RefreshTokenRepository
+        private refreshTokenRepository: RefreshTokenRepository,
+        @inject("DateRepository")
+        private dateRepository: DateRepository
     ) {}
 
     async execute(
@@ -75,10 +77,11 @@ export class RegisterAuthorUseCase {
             expiresIn: `${REFRESH_TOKEN_EXPIRE_IN_HOURS}h`,
         });
 
+        const expireIn = this.dateRepository.addHours(
+            REFRESH_TOKEN_EXPIRE_IN_HOURS
+        );
         const refreshTokenfromFactory = makeRefreshToken(authorId, {
-            expireIn: dayjs()
-                .add(REFRESH_TOKEN_EXPIRE_IN_HOURS, "hours")
-                .unix(),
+            expireIn,
             token: refreshToken,
         });
 

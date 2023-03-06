@@ -6,21 +6,25 @@ import { InMemoryRepository } from "../../repository/in-memory-author-repository
 import { makeAuthor } from "../../factory/makeAuthor";
 import { BadRequestError } from "@shared/errors/app-error";
 import { InMemoryRefreshTokenRepository } from "@app/modules/refresh-token/repository/in-memory-refresh-token";
+import { InMemoryDateProvider } from "@shared/container/providers/date-provider/implementations/in-memory-date-provider";
 
 let authorRepository: InMemoryRepository;
 let registerAuthorUseCase: RegisterAuthorUseCase;
 let inMemoryRedisProvider: InMemoryRedisProvider;
 let inMemoryRefreshTokenRepository: InMemoryRefreshTokenRepository;
+let inMemoryDateProvider: InMemoryDateProvider;
 
 describe("Register Author", () => {
     beforeEach(() => {
         inMemoryRedisProvider = new InMemoryRedisProvider();
         authorRepository = new InMemoryRepository();
         inMemoryRefreshTokenRepository = new InMemoryRefreshTokenRepository();
+        inMemoryDateProvider = new InMemoryDateProvider();
         registerAuthorUseCase = new RegisterAuthorUseCase(
             authorRepository,
             inMemoryRedisProvider,
-            inMemoryRefreshTokenRepository
+            inMemoryRefreshTokenRepository,
+            inMemoryDateProvider
         );
     });
 

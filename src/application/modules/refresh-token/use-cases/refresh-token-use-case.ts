@@ -1,11 +1,11 @@
 import { enviromentVariables } from "@app/constraints/enviroment-variables";
 import { RefreshTokenRepository } from "@app/repositories/refresh-token-repository";
 import { AppError } from "@shared/errors/app-error";
-import dayjs from "dayjs";
 import { sign, verify } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
 import { makeRefreshToken } from "../factory/make-refresh-token";
 import { RedisRepository } from "@app/repositories/redis-repository";
+import { DateRepository } from "@app/repositories/date-repository";
 
 interface RefreshTokenProps {
     accessToken: string;
@@ -18,7 +18,9 @@ export class RefreshTokenUseCase {
         @inject("RefreshTokenRepository")
         private refreshTokenRepository: RefreshTokenRepository,
         @inject("RedisRepository")
-        private redisClient: RedisRepository
+        private redisClient: RedisRepository,
+        @inject("DateRepository")
+        private dateRepository: DateRepository
     ) {}
 
     async execute(refreshToken: string): Promise<RefreshTokenProps> {
@@ -44,10 +46,11 @@ export class RefreshTokenUseCase {
             expiresIn: `${REFRESH_TOKEN_EXPIRE_IN_HOURS}h`,
         });
 
+        const expireIn = this.dateRepository.addHours(
+            REFRESH_TOKEN_EXPIRE_IN_HOURS
+        );
         const refreshTokenfromFactory = makeRefreshToken(authorId, {
-            expireIn: dayjs()
-                .add(REFRESH_TOKEN_EXPIRE_IN_HOURS, "hours")
-                .unix(),
+            expireIn,
             token: refreshTokenSigned,
         });
 
