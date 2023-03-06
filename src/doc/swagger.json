@@ -1,0 +1,49 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Author API",
+        "description": "Documentação de um sistema de autenticação de usuário e manipução de imagens",
+        "version:": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000",
+            "description": "API local"
+        },
+        {
+            "url": "https://interview-production-e06a.up.railway.app",
+            "description": "API de produção"
+        }
+    ],
+    "paths": {
+        "/upload": {
+            "post": {
+                "summary": "Upload de fotos",
+                "description": "Rota responsável pelo upload de fotos",
+                "tags": ["Picture"],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "file": "string",
+                                    "format": "binary"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Picture": {
+                "file": {
+                    "type": "binary"
+                }
+            }
+        }
+    }
+}
