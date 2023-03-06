@@ -11,8 +11,14 @@ class Token {
     }
 }
 
-export class TokenExpiration extends Token {
-    constructor(hours: number) {
+export class AccessTokenExpiration extends Token {
+    constructor(hours = 1) {
+        super(hours);
+    }
+}
+
+export class RefreshTokenExpiration extends Token {
+    constructor(hours = 24) {
         super(hours);
     }
 }

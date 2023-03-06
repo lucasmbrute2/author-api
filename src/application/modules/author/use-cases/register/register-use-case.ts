@@ -12,7 +12,10 @@ import { enviromentVariables } from "@app/constraints/enviroment-variables";
 import { RefreshTokenRepository } from "@app/repositories/refresh-token-repository";
 import { makeRefreshToken } from "@app/modules/refresh-token/factory/make-refresh-token";
 import { DateRepository } from "@app/repositories/date-repository";
-import { TokenExpiration } from "@app/helpers/token-expiration-time";
+import {
+    AccessTokenExpiration,
+    RefreshTokenExpiration,
+} from "@app/helpers/token-expiration-time";
 
 export interface RegisterAuthorRepositoryRequest {
     name: string;
@@ -65,17 +68,15 @@ export class RegisterAuthorUseCase {
 
         const { id: authorId } = author;
 
-        const accessTokenExpiration = new TokenExpiration(
-            1
-        ).getTokenExpirationHours();
+        const accessTokenExpiration =
+            new AccessTokenExpiration().getTokenExpirationHours();
         const token = sign({}, enviromentVariables.jwtTokenHash, {
             expiresIn: `${accessTokenExpiration}h`,
             subject: authorId,
         });
 
-        const refreshTokenExpiration = new TokenExpiration(
-            24
-        ).getTokenExpirationHours();
+        const refreshTokenExpiration =
+            new RefreshTokenExpiration().getTokenExpirationHours();
         const refreshToken = sign({}, enviromentVariables.refreshToken, {
             subject: authorId,
             expiresIn: `${refreshTokenExpiration}h`,

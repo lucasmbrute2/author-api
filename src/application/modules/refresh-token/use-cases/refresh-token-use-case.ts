@@ -6,7 +6,10 @@ import { inject, injectable } from "tsyringe";
 import { makeRefreshToken } from "../factory/make-refresh-token";
 import { RedisRepository } from "@app/repositories/redis-repository";
 import { DateRepository } from "@app/repositories/date-repository";
-import { TokenExpiration } from "@app/helpers/token-expiration-time";
+import {
+    AccessTokenExpiration,
+    RefreshTokenExpiration,
+} from "@app/helpers/token-expiration-time";
 
 interface RefreshTokenProps {
     accessToken: string;
@@ -39,9 +42,8 @@ export class RefreshTokenUseCase {
 
         await this.refreshTokenRepository.delete(authorId);
 
-        const accessTokenExpiration = new TokenExpiration(
-            1
-        ).getTokenExpirationHours();
+        const accessTokenExpiration =
+            new AccessTokenExpiration().getTokenExpirationHours();
         const refreshTokenSigned = sign({}, enviromentVariables.refreshToken, {
             subject: authorId,
             expiresIn: `${accessTokenExpiration}h`,
@@ -57,9 +59,8 @@ export class RefreshTokenUseCase {
             refreshTokenfromFactory
         );
 
-        const refreshTokenExpiration = new TokenExpiration(
-            24
-        ).getTokenExpirationHours();
+        const refreshTokenExpiration =
+            new RefreshTokenExpiration().getTokenExpirationHours();
         const accessToken = sign({}, enviromentVariables.jwtTokenHash, {
             expiresIn: `${refreshTokenExpiration}h`,
             subject: authorId,

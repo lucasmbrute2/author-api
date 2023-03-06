@@ -13,7 +13,10 @@ import { enviromentVariables } from "@app/constraints/enviroment-variables";
 import { makeRefreshToken } from "@app/modules/refresh-token/factory/make-refresh-token";
 import { DateRepository } from "@app/repositories/date-repository";
 import { RefreshTokenRepository } from "@app/repositories/refresh-token-repository";
-import { TokenExpiration } from "@app/helpers/token-expiration-time";
+import {
+    AccessTokenExpiration,
+    RefreshTokenExpiration,
+} from "@app/helpers/token-expiration-time";
 
 interface AuthAuthorUseCaseProps {
     email: string;
@@ -65,17 +68,15 @@ export class AuthAuthorUseCase {
 
         await this.refreshTokenRepository.delete(isAuthorExistent.id);
 
-        const accessTokenExpiration = new TokenExpiration(
-            1
-        ).getTokenExpirationHours();
+        const accessTokenExpiration =
+            new AccessTokenExpiration().getTokenExpirationHours();
         const token = sign({}, enviromentVariables.jwtTokenHash, {
             subject: isAuthorExistent.id,
             expiresIn: `${accessTokenExpiration}h`,
         });
 
-        const refreshTokenExpiration = new TokenExpiration(
-            24
-        ).getTokenExpirationHours();
+        const refreshTokenExpiration =
+            new RefreshTokenExpiration().getTokenExpirationHours();
         const refreshToken = sign({}, enviromentVariables.refreshToken, {
             subject: isAuthorExistent.id,
             expiresIn: `${refreshTokenExpiration}h`,
