@@ -1,6 +1,7 @@
 import { container } from "tsyringe";
 import "../container/providers/redis-provider/index";
 import "./providers/storage-provider/index";
+import "./providers/date-provider/index";
 import { PrismaClient } from "@prisma/client";
 import { AuthorRepository } from "../../application/repositories/author-repository";
 import { PrismaRepositoryAuthor } from "../infra/database/prisma/repository/prisma-author-repository";
