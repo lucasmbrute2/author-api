@@ -27,10 +27,15 @@ export class RegisterAuthorController {
                 password,
             });
 
+        res.cookie("jwt", refreshToken, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+        });
+
         return res.status(201).json({
             author: AuthorViewlModel.toHTTP(author),
             token,
-            refreshToken,
             status: "success",
         });
     }
