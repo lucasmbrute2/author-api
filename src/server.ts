@@ -7,6 +7,7 @@ import "./shared/container/index";
 import path from "path";
 import { enviromentVariables } from "@app/constraints/enviroment-variables";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
@@ -29,12 +30,13 @@ app.use(
 );
 
 app.use(express.json());
-app.use(route);
+app.use(cookieParser());
 app.use(
     "/picture/upload",
     express.static(path.resolve(__dirname, "..", "tmp"))
 );
 
+app.use(route);
 app.use(
     (
         error: Error,
