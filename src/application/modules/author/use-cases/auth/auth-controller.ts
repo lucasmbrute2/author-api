@@ -15,10 +15,25 @@ export class AuthAuthorController {
         const { email, password } = req.body;
 
         const authAuthorUseCase = container.resolve(AuthAuthorUseCase);
+        const { jwt: refreshToken } = req.cookies;
 
-        const { token } = await authAuthorUseCase.execute({
+        const { token, refresh_token } = await authAuthorUseCase.execute({
             email,
             password,
+            refreshToken,
+        });
+
+        res.clearCookie("jwt", {
+            httpOnly: true,
+            sameSite: "none",
+            secure: true,
+        });
+
+        res.cookie("jwt", refresh_token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+            maxAge: 24 * 60 * 60 * 1000,
         });
 
         return res.status(200).json({
