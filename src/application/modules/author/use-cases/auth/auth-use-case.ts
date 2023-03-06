@@ -62,7 +62,7 @@ export class AuthAuthorUseCase {
         if (isRefreshTokenValid.token !== req.refreshToken)
             throw new AppError("Refresh token invalid", 403);
 
-        await this.refreshTokenRepository.delete(req.refreshToken);
+        await this.refreshTokenRepository.delete(isAuthorExistent.id);
 
         const SECONDS = 60;
         const TOKEN_EXPIRE_IN_HOURS = SECONDS * SECONDS * 1;

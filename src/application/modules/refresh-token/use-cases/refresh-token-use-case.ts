@@ -36,8 +36,7 @@ export class RefreshTokenUseCase {
         if (!isRefreshTokenValid || isRefreshTokenValid.token !== refreshToken)
             throw new AppError("Refresh token invalid", 403);
 
-        const { id: tokenId } = isRefreshTokenValid;
-        await this.refreshTokenRepository.delete(tokenId);
+        await this.refreshTokenRepository.delete(authorId);
 
         const SECONDS = 60;
         const REFRESH_TOKEN_EXPIRE_IN_HOURS = SECONDS * SECONDS * 24;
