@@ -13,6 +13,7 @@ import { enviromentVariables } from "@app/constraints/enviroment-variables";
 import { makeRefreshToken } from "@app/modules/refresh-token/factory/make-refresh-token";
 import { DateRepository } from "@app/repositories/date-repository";
 import { RefreshTokenRepository } from "@app/repositories/refresh-token-repository";
+import { TokenExpiration } from "@app/helpers/token-expiration-time";
 
 interface AuthAuthorUseCaseProps {
     email: string;
@@ -64,22 +65,23 @@ export class AuthAuthorUseCase {
 
         await this.refreshTokenRepository.delete(isAuthorExistent.id);
 
-        const SECONDS = 60;
-        const TOKEN_EXPIRE_IN_HOURS = SECONDS * SECONDS * 1;
+        const accessTokenExpiration = new TokenExpiration(
+            1
+        ).getTokenExpirationHours();
         const token = sign({}, enviromentVariables.jwtTokenHash, {
             subject: isAuthorExistent.id,
-            expiresIn: `${TOKEN_EXPIRE_IN_HOURS}h`,
+            expiresIn: `${accessTokenExpiration}h`,
         });
 
-        const REFRESH_TOKEN_EXPIRE_IN_HOURS = SECONDS * SECONDS * 24;
+        const refreshTokenExpiration = new TokenExpiration(
+            24
+        ).getTokenExpirationHours();
         const refreshToken = sign({}, enviromentVariables.refreshToken, {
             subject: isAuthorExistent.id,
-            expiresIn: `${REFRESH_TOKEN_EXPIRE_IN_HOURS}h`,
+            expiresIn: `${refreshTokenExpiration}h`,
         });
 
-        const expireIn = this.dateRepository.addHours(
-            REFRESH_TOKEN_EXPIRE_IN_HOURS
-        );
+        const expireIn = this.dateRepository.addHours(refreshTokenExpiration);
         const refreshTokenfromFactory = makeRefreshToken(isAuthorExistent.id, {
             expireIn,
             token: refreshToken,
@@ -92,7 +94,7 @@ export class AuthAuthorUseCase {
         await this.redisClient.setValue(
             isAuthorExistent.id,
             token,
-            TOKEN_EXPIRE_IN_HOURS
+            accessTokenExpiration
         );
 
         return {

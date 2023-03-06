@@ -6,6 +6,7 @@ import { inject, injectable } from "tsyringe";
 import { makeRefreshToken } from "../factory/make-refresh-token";
 import { RedisRepository } from "@app/repositories/redis-repository";
 import { DateRepository } from "@app/repositories/date-repository";
+import { TokenExpiration } from "@app/helpers/token-expiration-time";
 
 interface RefreshTokenProps {
     accessToken: string;
@@ -38,16 +39,15 @@ export class RefreshTokenUseCase {
 
         await this.refreshTokenRepository.delete(authorId);
 
-        const SECONDS = 60;
-        const REFRESH_TOKEN_EXPIRE_IN_HOURS = SECONDS * SECONDS * 24;
+        const accessTokenExpiration = new TokenExpiration(
+            1
+        ).getTokenExpirationHours();
         const refreshTokenSigned = sign({}, enviromentVariables.refreshToken, {
             subject: authorId,
-            expiresIn: `${REFRESH_TOKEN_EXPIRE_IN_HOURS}h`,
+            expiresIn: `${accessTokenExpiration}h`,
         });
 
-        const expireIn = this.dateRepository.addHours(
-            REFRESH_TOKEN_EXPIRE_IN_HOURS
-        );
+        const expireIn = this.dateRepository.addHours(accessTokenExpiration);
         const refreshTokenfromFactory = makeRefreshToken(authorId, {
             expireIn,
             token: refreshTokenSigned,
@@ -57,13 +57,19 @@ export class RefreshTokenUseCase {
             refreshTokenfromFactory
         );
 
-        const TOKEN_EXPIRE_IN_HOURS = SECONDS * SECONDS * 1;
+        const refreshTokenExpiration = new TokenExpiration(
+            24
+        ).getTokenExpirationHours();
         const accessToken = sign({}, enviromentVariables.jwtTokenHash, {
-            expiresIn: `${TOKEN_EXPIRE_IN_HOURS}h`,
+            expiresIn: `${refreshTokenExpiration}h`,
             subject: authorId,
         });
 
-        this.redisClient.setValue(authorId, accessToken, TOKEN_EXPIRE_IN_HOURS);
+        this.redisClient.setValue(
+            authorId,
+            accessToken,
+            refreshTokenExpiration
+        );
 
         return {
             accessToken,
