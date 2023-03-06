@@ -19,4 +19,5 @@ export const enviromentVariables = {
         username: process.env.REDISUSER,
         password: process.env.REDISPASSWORD,
     },
+    origin: process.env.CLIENT_HOST,
 };
