@@ -20,16 +20,6 @@ describe("Auth Author", () => {
         );
     });
 
-    it("should not able to auth a user with mismatching password", () => {
-        expect(async () => {
-            const author = makeUserInRequest({
-                confirmPassword: "wrong-password",
-            });
-
-            await authAuthorUseCase.execute(author);
-        }).rejects.toBeInstanceOf(BadRequestError);
-    });
-
     it("should throw a error if user is not found", () => {
         expect(async () => {
             const author = makeUserInRequest();
@@ -49,7 +39,6 @@ describe("Auth Author", () => {
             await authAuthorUseCase.execute({
                 email: emailValue,
                 password: passwordValue,
-                confirmPassword: passwordValue,
             });
         }).not.toThrow;
     });
@@ -62,7 +51,6 @@ describe("Auth Author", () => {
             return await authAuthorUseCase.execute({
                 email: author.email.value,
                 password: "wrong-password",
-                confirmPassword: "wrong-password",
             });
         }).rejects.toThrow("Email or password incorrect");
     });
