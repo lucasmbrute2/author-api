@@ -1,3 +1,4 @@
+import { enviromentVariables } from "@app/constraints/enviroment-variables";
 import { PictureViewModel } from "@app/views/picture-view-model";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
@@ -12,6 +13,12 @@ export class UploadController {
         req: Request<nonValuable, nonValuable, UploadControllerProps>,
         res: Response
     ): Promise<Response> {
+        res.setHeader(
+            "Access-Control-Allow-Origin",
+            enviromentVariables.origin
+        );
+        res.setHeader("Access-Control-Allow-Credentials", "true");
+
         const uploadPictureUseCase = container.resolve(UploadPictureUseCase);
         const { file } = req;
         const { id } = req.userID;

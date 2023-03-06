@@ -10,7 +10,6 @@ import cors from "cors";
 
 const app = express();
 
-console.log({ test: enviromentVariables.origin });
 app.use(
     cors({
         credentials: true,
