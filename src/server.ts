@@ -9,6 +9,8 @@ import { enviromentVariables } from "@app/constraints/enviroment-variables";
 import cors from "cors";
 
 const app = express();
+
+console.log({ test: enviromentVariables.origin });
 app.use(
     cors({
         credentials: true,
@@ -18,7 +20,11 @@ app.use(
             "Content-Type",
             "Accept",
         ],
-        origin: [enviromentVariables.origin, "localhost"],
+        origin: [
+            enviromentVariables.origin,
+            "localhost:3000",
+            "http://127.0.0.1:5173",
+        ],
     })
 );
 
@@ -49,5 +55,4 @@ app.use(
         });
     }
 );
-
 app.listen(enviromentVariables.port, () => console.log("im running"));
