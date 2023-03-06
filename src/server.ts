@@ -9,7 +9,18 @@ import { enviromentVariables } from "@app/constraints/enviroment-variables";
 import cors from "cors";
 
 const app = express();
-app.use(cors());
+app.use(
+    cors({
+        credentials: true,
+        allowedHeaders: [
+            "Origin",
+            "X-Requested-With",
+            "Content-Type",
+            "Accept",
+        ],
+        origin: [enviromentVariables.origin, "localhost"],
+    })
+);
 
 app.use(express.json());
 app.use(route);
