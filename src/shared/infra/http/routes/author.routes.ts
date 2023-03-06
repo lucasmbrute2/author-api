@@ -31,6 +31,6 @@ authorRouter.put(
     resetPasswordController.handle
 );
 
-authorRouter.post("/refresh", refreshTokenController.handle);
+authorRouter.get("/refresh", refreshTokenController.handle);
 
 export { authorRouter };
