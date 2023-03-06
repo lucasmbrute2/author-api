@@ -8,13 +8,14 @@ import path from "path";
 import { enviromentVariables } from "@app/constraints/enviroment-variables";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { credentials } from "@shared/infra/http/middlewares/credentials";
-import { corsOptions } from "@app/constraints/cors-options";
 
 const app = express();
-app.use(credentials);
-
-app.use(cors(corsOptions));
+app.use(
+    cors({
+        origin: enviromentVariables.origin,
+        credentials: true,
+    })
+);
 
 app.use(express.json());
 app.use(cookieParser());
