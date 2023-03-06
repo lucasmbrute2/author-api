@@ -18,6 +18,7 @@ app.use(
             "X-Requested-With",
             "Content-Type",
             "Accept",
+            "Authorization",
         ],
         origin: [
             enviromentVariables.origin,
