@@ -31,12 +31,14 @@ export class PrismaRefreshTokenRepository implements RefreshTokenRepository {
         });
     }
 
-    async findByAuthorId(authorId: string): Promise<RefreshToken> {
+    async findByAuthorId(authorId: string): Promise<RefreshToken | null> {
         const refreshToken = await this.prisma.refreshToken.findUnique({
             where: {
                 userId: authorId,
             },
         });
+
+        if (!refreshToken) return null;
 
         return PrismaMapper.toDomain(refreshToken);
     }

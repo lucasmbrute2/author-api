@@ -42,14 +42,14 @@ export class RefreshTokenUseCase {
 
         await this.refreshTokenRepository.delete(authorId);
 
-        const accessTokenExpiration =
-            new AccessTokenExpiration().getTokenExpirationHours();
+        const refreshTokenExpiration =
+            new RefreshTokenExpiration().getTokenExpirationHours();
         const refreshTokenSigned = sign({}, enviromentVariables.refreshToken, {
             subject: authorId,
-            expiresIn: `${accessTokenExpiration}h`,
+            expiresIn: `${refreshTokenExpiration}h`,
         });
 
-        const expireIn = this.dateRepository.addHours(accessTokenExpiration);
+        const expireIn = this.dateRepository.addHours(refreshTokenExpiration);
         const refreshTokenfromFactory = makeRefreshToken(authorId, {
             expireIn,
             token: refreshTokenSigned,
@@ -59,10 +59,10 @@ export class RefreshTokenUseCase {
             refreshTokenfromFactory
         );
 
-        const refreshTokenExpiration =
+        const accessTokenExpiration =
             new RefreshTokenExpiration().getTokenExpirationHours();
         const accessToken = sign({}, enviromentVariables.jwtTokenHash, {
-            expiresIn: `${refreshTokenExpiration}h`,
+            expiresIn: `${accessTokenExpiration}h`,
             subject: authorId,
         });
 
