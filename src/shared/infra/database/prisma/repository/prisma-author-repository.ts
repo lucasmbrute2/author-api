@@ -36,10 +36,12 @@ export class PrismaRepositoryAuthor implements AuthorRepository {
             where: {
                 username: email.value,
             },
+            include: {
+                refresh_token: true,
+            },
         });
 
         if (!author) return null;
-
         return PrismaMapper.toDomain(author);
     }
 
@@ -58,6 +60,9 @@ export class PrismaRepositoryAuthor implements AuthorRepository {
         const author = await this.prisma.author.findUnique({
             where: {
                 id,
+            },
+            include: {
+                refresh_token: true,
             },
         });
 

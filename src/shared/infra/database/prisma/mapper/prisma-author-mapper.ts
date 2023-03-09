@@ -1,6 +1,15 @@
 import { Author } from "@app/modules/author/entities/author-entity";
 import { Email, Name, Password } from "@app/modules/author/entities/validation";
-import { Author as rawAuthor } from "@prisma/client";
+import {
+    Author as rawAuthor,
+    RefreshToken as rawRefreshToken,
+} from "@prisma/client";
+
+interface token {
+    refresh_token: rawRefreshToken;
+}
+
+type AuthorMayIncludeRefreshToken = rawAuthor & Partial<token>;
 
 export class PrismaMapper {
     static toPrisma(author: Author): rawAuthor {
@@ -29,7 +38,7 @@ export class PrismaMapper {
         };
     }
 
-    static toDomain(author: rawAuthor): Author {
+    static toDomain(author: AuthorMayIncludeRefreshToken): Author {
         const {
             bio,
             id,
@@ -39,6 +48,7 @@ export class PrismaMapper {
             galleryId,
             created_at: createdAt,
             profile_picture: profilePicture,
+            refresh_token: { token },
         } = author;
 
         return new Author({
@@ -50,6 +60,7 @@ export class PrismaMapper {
             galleryId,
             profilePicture,
             createdAt,
+            refreshToken: token,
         });
     }
 }
