@@ -15,26 +15,8 @@ export class PrismaRepositoryPicture implements PictureRepository {
 
     async save(picture: Picture): Promise<void> {
         const prismaPicture = PrismaMapper.toPrisma(picture);
-        const {
-            alias_key,
-            created_at,
-            deleted_at,
-            galleryId,
-            html_url,
-            id,
-            name,
-        } = prismaPicture;
-
         await this.prisma.picture.create({
-            data: {
-                alias_key,
-                created_at,
-                html_url,
-                id,
-                name,
-                deleted_at,
-                galleryId,
-            },
+            data: prismaPicture,
         });
     }
 
