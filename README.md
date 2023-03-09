@@ -37,10 +37,8 @@ You are able to auth your user.
 
 expected body: 
 ```
-* name: string
 * email: string unique
 * password: string
-* confirmPassword: string
 ```
 
 ### Picture routes (most importants)
