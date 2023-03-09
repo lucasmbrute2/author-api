@@ -1,3 +1,4 @@
+import { AuthorViewlModel } from "@app/views/author-view-model";
 import { PictureViewModel } from "@app/views/picture-view-model";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
@@ -11,14 +12,15 @@ export class ListByGalleryIdController {
         const { page } = req.query;
         const { id } = req.userID;
 
-        const { pictures } = await listByGalleryIdUseCase.execute(
+        const { pictures, author } = await listByGalleryIdUseCase.execute(
             Number(page) || 1,
             id
         );
 
-        const formatPictes = pictures.map(PictureViewModel.toHTTP);
+        const formattedPictures = pictures.map(PictureViewModel.toHTTP);
         return res.status(200).json({
-            pictures: formatPictes,
+            pictures: formattedPictures,
+            author: AuthorViewlModel.toHTTP(author),
             status: "success",
         });
     }
