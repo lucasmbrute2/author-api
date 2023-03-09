@@ -1,3 +1,4 @@
+import { Gallery } from "@prisma/client";
 import { randomUUID } from "crypto";
 
 interface PictureProps {
@@ -8,6 +9,7 @@ interface PictureProps {
     createdAt?: Date;
     deletedAt?: Date;
     galleryId?: string;
+    gallery?: Gallery;
 }
 
 export class Picture {
@@ -70,5 +72,9 @@ export class Picture {
     _galleryId() {
         if (this.props.galleryId) return;
         this.props.galleryId = randomUUID();
+    }
+
+    get gallery(): Gallery {
+        return this.props.gallery;
     }
 }
