@@ -1,7 +1,12 @@
 import { inject, injectable } from "tsyringe";
 import { PictureRepository } from "@app/repositories/picture-repository";
 import { AuthorRepository } from "@app/repositories/author-repository";
-import { BadRequestError, NotFoundError } from "@shared/errors/app-error";
+import {
+    BadRequestError,
+    NotFoundError,
+    Unauthorized,
+} from "@shared/errors/app-error";
+import { Picture } from "../../entities/picture";
 
 @injectable()
 export class SoftDeleteUseCase {
@@ -11,23 +16,17 @@ export class SoftDeleteUseCase {
         @inject("AuthorRepository")
         private authorRepository: AuthorRepository
     ) {}
-    async execute(pictureName: string, id: string): Promise<void> {
-        if (!id) throw new BadRequestError("Author ID is required");
-        if (!pictureName) throw new BadRequestError("Picture name is required");
+    async execute(aliasKey: string, id: string): Promise<Picture> {
+        if (!id) throw new Unauthorized("Author ID is required");
+        if (!aliasKey) throw new BadRequestError("Picture name is required");
 
         const author = await this.authorRepository.findByID(id);
         if (!author) throw new NotFoundError("Author not found");
-        if (author.deletedAt)
-            throw new BadRequestError(
-                "This author already has a deleted_at date."
-            );
 
-        const picture = await this.pictureRepository.findByName(pictureName);
+        const picture = await this.pictureRepository.findByName(aliasKey);
         if (!picture || picture.deletedAt)
             throw new NotFoundError("Picture not found");
 
-        const { aliasKey } = picture;
-
-        await this.pictureRepository.delete(aliasKey);
+        return await this.pictureRepository.softDelete(picture.aliasKey);
     }
 }
