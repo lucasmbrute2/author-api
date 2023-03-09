@@ -64,7 +64,8 @@ You are able to list all users from entire app and from your Gallery. It must be
 # Improvements and extensions
 
 * Finish and improve unit tests
-* Improve prisma query relations ( maybe author could already return pictures e.g) and save DB calls to increase perfomance.
+* Improve prisma query relations ( maybe author could already return pictures e.g) and save DB calls to increase perfomance
+* Implent Cache in GET endpoints
 * We must implement a rate limiter and debounce to prevent alot of requests
 * Tests E2E would be really good
 * Observation -> sentry or any other tool
