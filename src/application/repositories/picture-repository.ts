@@ -5,6 +5,6 @@ export interface PictureRepository {
     findByName(pictureName: string): Promise<Picture | void>;
     save(picture: Picture, authorId?: string): Promise<void>;
     delete(pictureName: string): Promise<void>;
-    softDelete(pictureName: string): Promise<void>;
+    softDelete(pictureName: string): Promise<Picture>;
     list(page: number): Promise<Picture[]>;
 }

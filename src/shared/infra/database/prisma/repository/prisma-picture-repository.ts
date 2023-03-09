@@ -25,6 +25,13 @@ export class PrismaRepositoryPicture implements PictureRepository {
             where: {
                 alias_key: pictureName,
             },
+            include: {
+                gallery: {
+                    include: {
+                        author: true,
+                    },
+                },
+            },
         });
 
         if (!picture) return null;
@@ -57,20 +64,28 @@ export class PrismaRepositoryPicture implements PictureRepository {
             orderBy: {
                 created_at: "desc",
             },
+            include: {
+                gallery: true,
+            },
         });
 
         return pictures.map(PrismaMapper.toDomain);
     }
 
-    async softDelete(pictureName: string): Promise<void> {
-        await this.prisma.picture.update({
+    async softDelete(pictureName: string): Promise<Picture> {
+        const picture = await this.prisma.picture.update({
             where: {
                 alias_key: pictureName,
             },
             data: {
-                deleted_at: randomUUID(),
+                deleted_at: new Date(),
+            },
+            include: {
+                gallery: true,
             },
         });
+
+        return PrismaMapper.toDomain(picture);
     }
 
     async list(page: number): Promise<Picture[]> {
@@ -89,6 +104,9 @@ export class PrismaRepositoryPicture implements PictureRepository {
             take: NUMBERS_OF_PICTURES_TO_DISPLAY,
             orderBy: {
                 created_at: "asc",
+            },
+            include: {
+                gallery: true,
             },
         });
 
