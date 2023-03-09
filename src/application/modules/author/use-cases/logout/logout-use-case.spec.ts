@@ -2,7 +2,6 @@ import { InMemoryRedisProvider } from "@shared/container/providers/redis-provide
 import "reflect-metadata";
 import { beforeEach, describe, expect, it } from "vitest";
 import { makeAuthor } from "../../factory/makeAuthor";
-import { makeUserInRequest } from "../../factory/makeAuthorRequest";
 import { InMemoryRepository } from "../../repository/in-memory-author-repository";
 import { LogoutUseCase } from "./logout-use-case";
 

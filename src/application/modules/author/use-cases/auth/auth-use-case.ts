@@ -6,8 +6,8 @@ import { AuthorRepository } from "@app/repositories/author-repository";
 import { RedisRepository } from "@app/repositories/redis-repository";
 import {
     AppError,
-    BadRequestError,
     NotFoundError,
+    Unauthorized,
 } from "@shared/errors/app-error";
 import { enviromentVariables } from "@app/constraints/enviroment-variables";
 import { makeRefreshToken } from "@app/modules/refresh-token/factory/make-refresh-token";
@@ -56,14 +56,9 @@ export class AuthAuthorUseCase {
         );
 
         if (!isPasswordCorrect)
-            throw new BadRequestError("Email or password incorrect");
+            throw new Unauthorized("Email or password incorrect");
 
-        const isRefreshTokenValid =
-            await this.refreshTokenRepository.findByAuthorId(
-                isAuthorExistent.id
-            );
-
-        if (isRefreshTokenValid.token !== req.refreshToken)
+        if (isAuthorExistent.refreshToken !== req.refreshToken)
             throw new AppError("Refresh token invalid", 403);
 
         await this.refreshTokenRepository.delete(isAuthorExistent.id);

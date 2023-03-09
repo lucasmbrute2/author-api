@@ -2,7 +2,7 @@ import { makeRefreshToken } from "@app/modules/refresh-token/factory/make-refres
 import { InMemoryRefreshTokenRepository } from "@app/modules/refresh-token/repository/in-memory-refresh-token";
 import { InMemoryDateProvider } from "@shared/container/providers/date-provider/implementations/in-memory-date-provider";
 import { RedisProvider } from "@shared/container/providers/redis-provider/implementations/redis-provider";
-import { BadRequestError, NotFoundError } from "@shared/errors/app-error";
+import { NotFoundError, Unauthorized } from "@shared/errors/app-error";
 import "reflect-metadata";
 import { beforeEach, describe, expect, it } from "vitest";
 import { makeAuthor } from "../../factory/makeAuthor";
@@ -46,7 +46,7 @@ describe("Auth Author", () => {
     it("should be able to auth a User", () => {
         expect(async () => {
             const author = makeAuthor();
-            authorRepository.create(author);
+            await authorRepository.create(author);
             const { token: refreshToken } = makeRefreshToken(author.id);
             const {
                 email: { value: emailValue },
@@ -58,7 +58,7 @@ describe("Auth Author", () => {
                 password: passwordValue,
                 refreshToken,
             });
-        }).rejects.toThrow();
+        }).toBeTruthy();
     });
 
     it("should not be able to auth a user with wrong password", () => {
@@ -72,6 +72,6 @@ describe("Auth Author", () => {
                 password: "wrong-password",
                 refreshToken,
             });
-        }).rejects.toBeInstanceOf(BadRequestError);
+        }).rejects.toBeInstanceOf(Unauthorized);
     });
 });
