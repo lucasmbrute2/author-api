@@ -1,3 +1,4 @@
+import { Author } from "@app/modules/author/entities/author-entity";
 import { Gallery } from "@prisma/client";
 import { randomUUID } from "crypto";
 
@@ -9,7 +10,7 @@ interface PictureProps {
     createdAt?: Date;
     deletedAt?: Date;
     galleryId?: string;
-    gallery?: Gallery;
+    author?: Author;
 }
 
 export class Picture {
@@ -74,7 +75,7 @@ export class Picture {
         this.props.galleryId = randomUUID();
     }
 
-    get gallery(): Gallery {
-        return this.props.gallery;
+    get author(): Author {
+        return this.props.author;
     }
 }
