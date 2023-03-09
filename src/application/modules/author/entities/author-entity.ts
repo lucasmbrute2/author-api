@@ -12,6 +12,7 @@ interface AuthorProps {
     createdAt: Date;
     deletedAt?: Date;
     galleryId?: string;
+    refreshToken?: string;
 }
 
 export class Author {
@@ -91,5 +92,9 @@ export class Author {
 
     get galleryId(): string {
         return this.props.galleryId;
+    }
+
+    get refreshToken(): string {
+        return this.props.refreshToken;
     }
 }
