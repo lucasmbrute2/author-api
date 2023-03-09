@@ -35,7 +35,7 @@ export class ListByGalleryIdUseCase {
         const author = await this.authorRepository.findByID(authorID);
         if (!author) throw new NotFoundError("Author not found");
 
-        const pictures = await this.pictureRepository.getByGalleryId(
+        const pictures = await this.pictureRepository.listByGalleryId(
             page,
             author.galleryId
         );

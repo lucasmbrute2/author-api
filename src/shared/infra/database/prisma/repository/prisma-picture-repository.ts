@@ -39,7 +39,7 @@ export class PrismaRepositoryPicture implements PictureRepository {
         });
     }
 
-    async getByGalleryId(page: number, galleryId: string): Promise<Picture[]> {
+    async listByGalleryId(page: number, galleryId: string): Promise<Picture[]> {
         const NUMBERS_OF_PICTURES_TO_DISPLAY = 6;
         const skip = (page - 1) * NUMBERS_OF_PICTURES_TO_DISPLAY;
 
@@ -73,7 +73,7 @@ export class PrismaRepositoryPicture implements PictureRepository {
         });
     }
 
-    async getAll(page: number): Promise<Picture[]> {
+    async list(page: number): Promise<Picture[]> {
         const NUMBERS_OF_PICTURES_TO_DISPLAY = 6;
         const skip = (page - 1) * NUMBERS_OF_PICTURES_TO_DISPLAY;
 
