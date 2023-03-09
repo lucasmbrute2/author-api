@@ -1,3 +1,4 @@
+import { Author } from "@app/modules/author/entities/author-entity";
 import { Picture } from "../modules/picture/entities/picture";
 
 interface PictureViewModelProps {
@@ -7,11 +8,13 @@ interface PictureViewModelProps {
     id: string;
     createdAt: Date;
     galleryId: string;
+    deletedAt: Date;
 }
 
 export class PictureViewModel {
     static toHTTP(file: Picture): PictureViewModelProps {
-        const { aliasKey, createdAt, galleryId, id, name, htmlUrl } = file;
+        const { aliasKey, createdAt, galleryId, id, name, htmlUrl, deletedAt } =
+            file;
         return {
             name,
             aliasKey,
@@ -19,6 +22,7 @@ export class PictureViewModel {
             createdAt,
             galleryId,
             id,
+            deletedAt,
         };
     }
 }

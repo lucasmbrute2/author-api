@@ -1,11 +1,12 @@
 import { Picture } from "@app/modules/picture/entities/picture";
-import { Gallery as RawGallery, Picture as PictureRaw } from "@prisma/client";
+import { Author as RawAuthor, Picture as PictureRaw } from "@prisma/client";
+import { PrismaMapper as PrismaAuthorMapper } from "@shared/infra/database/prisma/mapper/prisma-author-mapper";
 
-interface IGallery {
-    gallery: RawGallery;
+interface IAuthor {
+    author: RawAuthor;
 }
 
-type PictureMayIncludeGallery = PictureRaw & Partial<IGallery>;
+type PictureMayIncludeAuthor = PictureRaw & Partial<IAuthor>;
 
 export class PrismaMapper {
     static toPrisma(picture: Picture): PictureRaw {
@@ -28,7 +29,7 @@ export class PrismaMapper {
             galleryId,
         };
     }
-    static toDomain(picture: PictureMayIncludeGallery): Picture {
+    static toDomain(picture: PictureMayIncludeAuthor): Picture {
         const {
             alias_key: aliasKey,
             created_at: createdAt,
@@ -37,7 +38,7 @@ export class PrismaMapper {
             html_url: htmlUrl,
             id,
             name,
-            gallery,
+            author,
         } = picture;
         return new Picture({
             aliasKey,
@@ -47,7 +48,7 @@ export class PrismaMapper {
             createdAt,
             deletedAt,
             galleryId,
-            gallery,
+            author: PrismaAuthorMapper.toDomain(author),
         });
     }
 }

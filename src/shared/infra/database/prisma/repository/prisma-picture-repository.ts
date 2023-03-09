@@ -35,7 +35,15 @@ export class PrismaRepositoryPicture implements PictureRepository {
         });
 
         if (!picture) return null;
-        return PrismaMapper.toDomain(picture);
+
+        const {
+            gallery: { author },
+            ...rest
+        } = picture;
+        return PrismaMapper.toDomain({
+            author,
+            ...rest,
+        });
     }
 
     async delete(pictureName: string): Promise<void> {
@@ -65,11 +73,25 @@ export class PrismaRepositoryPicture implements PictureRepository {
                 created_at: "desc",
             },
             include: {
-                gallery: true,
+                gallery: {
+                    include: {
+                        author: true,
+                    },
+                },
             },
         });
 
-        return pictures.map(PrismaMapper.toDomain);
+        return pictures.map((picture) => {
+            const {
+                gallery: { author },
+                ...rest
+            } = picture;
+
+            return PrismaMapper.toDomain({
+                author,
+                ...rest,
+            });
+        });
     }
 
     async softDelete(pictureName: string): Promise<Picture> {
@@ -81,11 +103,22 @@ export class PrismaRepositoryPicture implements PictureRepository {
                 deleted_at: new Date(),
             },
             include: {
-                gallery: true,
+                gallery: {
+                    include: {
+                        author: true,
+                    },
+                },
             },
         });
 
-        return PrismaMapper.toDomain(picture);
+        const {
+            gallery: { author },
+            ...rest
+        } = picture;
+        return PrismaMapper.toDomain({
+            author,
+            ...rest,
+        });
     }
 
     async list(page: number): Promise<Picture[]> {
@@ -106,10 +139,24 @@ export class PrismaRepositoryPicture implements PictureRepository {
                 created_at: "asc",
             },
             include: {
-                gallery: true,
+                gallery: {
+                    include: {
+                        author: true,
+                    },
+                },
             },
         });
 
-        return pictures.map(PrismaMapper.toDomain);
+        return pictures.map((picture) => {
+            const {
+                gallery: { author },
+                ...rest
+            } = picture;
+
+            return PrismaMapper.toDomain({
+                author,
+                ...rest,
+            });
+        });
     }
 }

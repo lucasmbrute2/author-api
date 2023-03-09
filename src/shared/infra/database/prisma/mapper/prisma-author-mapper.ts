@@ -48,7 +48,7 @@ export class PrismaMapper {
             galleryId,
             created_at: createdAt,
             profile_picture: profilePicture,
-            refresh_token: { token },
+            refresh_token,
         } = author;
 
         return new Author({
@@ -60,7 +60,7 @@ export class PrismaMapper {
             galleryId,
             profilePicture,
             createdAt,
-            refreshToken: token,
+            refreshToken: refresh_token?.token ?? "",
         });
     }
 }
